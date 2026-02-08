@@ -1,0 +1,24 @@
+{
+  "name": "sagip-manileno-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexander-harvy/sagip-manileno-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Alexander-harvy/sagip-manileno-backend/issues"
+  },
+  "homepage": "https://github.com/Alexander-harvy/sagip-manileno-backend#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
