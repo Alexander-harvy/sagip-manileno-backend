@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
-
   },
   "repository": {
     "type": "git",
@@ -21,6 +20,7 @@
   },
   "homepage": "https://github.com/Alexander-harvy/sagip-manileno-backend#readme",
   "dependencies": {
+    "dotenv": "^17.2.4",
     "express": "^5.2.1"
   },
   "devDependencies": {
