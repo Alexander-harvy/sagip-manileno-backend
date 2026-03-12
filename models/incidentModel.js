@@ -5,22 +5,22 @@ const IncidentModel = {
     const {
       user_id,
       incident_type,
-      description,
       latitude,
       longitude,
-      address,
-      status,
+      description,
+      reported_at,
+      source,
     } = incidentData;
 
     const sql = `
-      INSERT INTO incidents (
+      INSERT INTO incident (
         user_id,
         incident_type,
-        description,
         latitude,
         longitude,
-        address,
-        status
+        description,
+        reported_at,
+        source
       )
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
@@ -28,11 +28,11 @@ const IncidentModel = {
     const [result] = await db.execute(sql, [
       user_id,
       incident_type,
-      description,
       latitude,
       longitude,
-      address,
-      status || "pending",
+      description,
+      reported_at,
+      source,
     ]);
 
     return result;
@@ -40,8 +40,20 @@ const IncidentModel = {
 
   async getAllIncidents() {
     const sql = `
-      SELECT * FROM incidents
-      ORDER BY id DESC
+      SELECT 
+        i.incident_id,
+        i.user_id,
+        u.first_name,
+        u.last_name,
+        i.incident_type,
+        i.latitude,
+        i.longitude,
+        i.description,
+        i.reported_at,
+        i.source
+      FROM incident i
+      JOIN users u ON i.user_id = u.user_id
+      ORDER BY i.incident_id DESC
     `;
 
     const [rows] = await db.execute(sql);
