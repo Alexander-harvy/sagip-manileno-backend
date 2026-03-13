@@ -1,0 +1,18 @@
+$kind: http-request
+name: New Request
+url: http://localhost:3000/api/users
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"full_name\": \"Juan Dela Cruz\",\r
+
+    \  \"email\": \"juan@gmail.com\",\r
+
+    \  \"phone\": \"09123456789\",\r
+
+    \  \"role\": \"citizen\"\r
+
+    }"
+order: 3470418807895742

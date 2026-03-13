@@ -1,27 +1,34 @@
+const bcrypt = require("bcrypt");
 const UserModel = require("../models/userModel");
 
 const createUser = async (req, res) => {
   try {
-    const { full_name, email, phone, role } = req.body;
+    const { first_name, last_name, contact_no, password } = req.body;
 
-    if (!full_name || !email || !role) {
+    if (!first_name || !last_name || !contact_no || !password) {
       return res.status(400).json({
         success: false,
-        message: "full_name, email, and role are required",
+        message: "first_name, last_name, contact_no, and password are required",
       });
     }
 
-    const result = await UserModel.createUser({ full_name, email, phone, role });
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const result = await UserModel.createUser({
+      first_name,
+      last_name,
+      contact_no,
+      password: hashedPassword,
+    });
 
     res.status(201).json({
       success: true,
       message: "User created successfully",
       data: {
-        id: result.insertId,
-        full_name,
-        email,
-        phone,
-        role,
+        user_id: result.insertId,
+        first_name,
+        last_name,
+        contact_no,
       },
     });
   } catch (error) {

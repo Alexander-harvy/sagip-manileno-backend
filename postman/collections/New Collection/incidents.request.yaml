@@ -1,0 +1,22 @@
+$kind: http-request
+name: incidents
+url: 'http://localhost:3000/api/incidents/1/assign'
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"user_id\": 1,\r
+
+    \  \"incident_type\": \"Fire\",\r
+
+    \  \"latitude\": 14.5995,\r
+
+    \  \"longitude\": 120.9842,\r
+
+    \  \"description\": \"Fire spreading in residential building\",\r
+
+    \  \"source\": \"mobile_app\"\r
+
+    }"
+order: 4234771464608237

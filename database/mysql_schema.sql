@@ -1,3 +1,6 @@
+CREATE DATABASE sagip_manileno_db;
+USE sagip_manileno_db;
+
 CREATE TABLE `department` (
   `dept_id` int NOT NULL AUTO_INCREMENT,
   `dept_name` varchar(100) NOT NULL,

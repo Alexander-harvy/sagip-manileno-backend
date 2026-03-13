@@ -2,19 +2,30 @@ const db = require("../config/db");
 
 const UserModel = {
   async createUser(userData) {
-    const { full_name, email, phone, role } = userData;
+    const { first_name, last_name, contact_no, password } = userData;
 
     const sql = `
-      INSERT INTO users (full_name, email, phone, role)
+      INSERT INTO users (first_name, last_name, contact_no, password)
       VALUES (?, ?, ?, ?)
     `;
 
-    const [result] = await db.execute(sql, [full_name, email, phone, role]);
+    const [result] = await db.execute(sql, [
+      first_name,
+      last_name,
+      contact_no,
+      password,
+    ]);
+
     return result;
   },
 
   async getAllUsers() {
-    const sql = `SELECT * FROM users ORDER BY id DESC`;
+    const sql = `
+      SELECT user_id, first_name, last_name, contact_no
+      FROM users
+      ORDER BY user_id DESC
+    `;
+
     const [rows] = await db.execute(sql);
     return rows;
   },

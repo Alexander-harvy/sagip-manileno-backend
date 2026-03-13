@@ -2,29 +2,32 @@ const ResponderModel = require("../models/responderModel");
 
 const createResponder = async (req, res) => {
   try {
-    const { user_id, department, availability_status } = req.body;
+    console.log(req.body);
+    const { dept_id, first_name, last_name, contact_no } = req.body;
 
-    if (!user_id || !department) {
+    if (!dept_id || !first_name || !last_name || !contact_no) {
       return res.status(400).json({
         success: false,
-        message: "user_id and department are required",
+        message: "dept_id, first_name, last_name, and contact_no are required",
       });
     }
 
     const result = await ResponderModel.createResponder({
-      user_id,
-      department,
-      availability_status,
+      dept_id,
+      first_name,
+      last_name,
+      contact_no,
     });
 
     res.status(201).json({
       success: true,
       message: "Responder created successfully",
       data: {
-        id: result.insertId,
-        user_id,
-        department,
-        availability_status: availability_status || "available",
+        responder_id: result.insertId,
+        dept_id,
+        first_name,
+        last_name,
+        contact_no,
       },
     });
   } catch (error) {
