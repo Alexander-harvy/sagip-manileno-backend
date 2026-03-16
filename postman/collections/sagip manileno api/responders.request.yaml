@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:3000/api/responders
+method: GET
+order: 4497159076998093

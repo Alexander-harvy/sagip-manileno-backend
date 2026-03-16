@@ -1,0 +1,16 @@
+$kind: http-request
+name: department
+url: http://localhost:3000/api/departments
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"dept_name\": \"BFP Manila\",\r
+
+    \  \"dept_type\": \"Fire\",\r
+
+    \  \"contact_no\": \"09123456789\"\r
+
+    }"
+order: 4500350367169728

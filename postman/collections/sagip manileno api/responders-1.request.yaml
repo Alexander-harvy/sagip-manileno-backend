@@ -1,0 +1,20 @@
+$kind: http-request
+name: responders
+url: http://localhost:3000/api/responders
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"dept_id\": 1,\r
+
+    \  \"first_name\": \"sheena\",\r
+
+    \  \"last_name\": \"laromac\",\r
+
+    \  \"contact_no\": \"09912345623\",\r
+
+    \  \"password\":  \"passworkddqwd1231e\"\r
+
+    }"
+order: 4498235582330189

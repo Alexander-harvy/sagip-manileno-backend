@@ -1,20 +1,18 @@
 $kind: http-request
-name: health request
+name: users
 url: http://localhost:3000/api/users
-method: GET
+method: POST
 body:
   type: json
   content: "{\r
-
-    \  \"user_id\": \"1\",\r
 
     \  \"first_name\": \"Juan\",\r
 
     \  \"last_name\": \"Dela Cruz\",\r
 
-    \  \"contact_no\": \"09123456789\",\r
+    \  \"contact_no\": \"09123456719\",\r
 
     \  \"password\": \"0251155\"\r
 
     }"
-order: 1649943904553682
+order: 4500031796647598

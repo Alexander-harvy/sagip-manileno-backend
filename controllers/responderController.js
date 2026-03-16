@@ -2,13 +2,13 @@ const ResponderModel = require("../models/responderModel");
 
 const createResponder = async (req, res) => {
   try {
-    console.log(req.body);
-    const { dept_id, first_name, last_name, contact_no } = req.body;
+  
+    const { dept_id, first_name, last_name, contact_no, password } = req.body;
 
-    if (!dept_id || !first_name || !last_name || !contact_no) {
+    if (!dept_id || !first_name || !last_name || !contact_no || !password) {
       return res.status(400).json({
         success: false,
-        message: "dept_id, first_name, last_name, and contact_no are required",
+        message: "All fields are required",
       });
     }
 
@@ -17,6 +17,7 @@ const createResponder = async (req, res) => {
       first_name,
       last_name,
       contact_no,
+      password
     });
 
     res.status(201).json({
@@ -56,7 +57,33 @@ const getAllResponders = async (req, res) => {
   }
 };
 
+const getResponderById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const responder = await ResponderModel.getResponderById(id);
+
+    if (!responder) {
+      return res.status(404).json({
+        success: false,
+        message: "Responder not found",
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        data: responder,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch responder",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createResponder,
   getAllResponders,
+  getResponderById,
 };
