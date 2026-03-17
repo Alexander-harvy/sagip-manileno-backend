@@ -57,9 +57,18 @@ const getDepartmentById = async (dept_id) => {
   return rows[0];
 };
 
+const getAdminByContactNo = async (contact_no) => {
+  const [rows] = await db.execute(
+    `SELECT * FROM emergency_unit_admin WHERE contact_no = ?`,
+    [contact_no]
+  );
+  return rows[0];
+};
+
 module.exports = {
   createAdmin,
   getAllAdmins,
   getAdminById,
   getDepartmentById,
+  getAdminByContactNo,
 };

@@ -1,0 +1,15 @@
+$kind: http-request
+url: http://localhost:3000/api/users/login
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \r
+
+    \    \"contact_no\": \"09394228611\",\r
+
+    \    \"password\": \"051705\"\r
+
+    }"
+order: 4364823022539229

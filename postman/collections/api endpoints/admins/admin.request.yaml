@@ -1,4 +1,5 @@
 $kind: http-request
+name: admin
 url: http://localhost:3000/api/admins
 method: GET
-order: 4488072124159978
+order: 1773746005817

@@ -82,8 +82,57 @@ const getUserById = async (req, res) => {
   }
 };
 
+const loginUser = async (req, res) => {
+  try {
+    const { contact_no, password } = req.body;
+
+    if (!contact_no || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "contact_no and password are required",
+      });
+    }
+
+    const user = await UserModel.getUserByContactNo(contact_no);
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Login successful",
+      data: {
+        user_id: user.user_id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        contact_no: user.contact_no,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Login failed",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createUser,
   getAllUsers,
   getUserById,
+  loginUser,
 };

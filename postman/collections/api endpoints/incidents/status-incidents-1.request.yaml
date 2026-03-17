@@ -1,0 +1,5 @@
+$kind: http-request
+name: status-incidents
+url: http://localhost:3000/api/incidents/1/status
+method: GET
+order: 4484198893622777

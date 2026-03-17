@@ -113,8 +113,59 @@ const getAdminById = async (req, res) => {
   }
 };
 
+  const loginAdmin = async (req, res) => {
+  try {
+    const { contact_no, password } = req.body;
+
+    if (!contact_no || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "contact_no and password are required",
+      });
+    } 
+
+    const admin = await AdminModel.getAdminByContactNo(contact_no); 
+
+    if (!admin) {
+      return res.status(401).json({    
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, admin.password);
+
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Admin logged in successfully",
+      data: {
+          admin_id: admin.admin_id,
+          dept_id: admin.dept_id,
+          first_name: admin.first_name,
+          last_name: admin.last_name,
+          contact_no: admin.contact_no,
+    },
+    });
+  } catch (error) {
+    console.error("loginAdmin error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
+  }
+    }
+
 module.exports = {
   createAdmin,
   getAllAdmins,
   getAdminById,
+  loginAdmin,
 };

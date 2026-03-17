@@ -41,7 +41,13 @@ const UserModel = {
     return rows[0];
   },
 
+  async getUserByContactNo(contact_no) {
+  const [rows] = await db.execute(
+    `SELECT * FROM users WHERE contact_no = ?`,
+    [contact_no]
+  );
+  return rows[0];
+}
+
 };
-
-
 module.exports = UserModel;

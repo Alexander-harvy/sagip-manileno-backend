@@ -1,0 +1,14 @@
+$kind: http-request
+name: reponder login
+url: http://localhost:3000/api/responders/login
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"contact_no\": \"09911112222\",\r
+
+    \  \"password\": \"responder123\"\r
+
+    }"
+order: 4279079269187447

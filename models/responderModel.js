@@ -57,6 +57,14 @@ const ResponderModel = {
     const [rows] = await db.execute(sql, [responder_id]);
     return rows[0];
   },
+
+  async getResponderByContactNo(contact_no) {
+    const [rows] = await db.execute(
+      `SELECT * FROM responder WHERE contact_no = ?`,
+      [contact_no]
+    );
+    return rows[0];
+  }
 };
 
 module.exports = ResponderModel;
