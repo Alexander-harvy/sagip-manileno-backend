@@ -6,8 +6,14 @@ const {
   getDepartmentById,
 } = require("../controllers/departmentController");
 
-router.post("/", createDepartment);
-router.get("/", getAllDepartments);
-router.get("/:id/Departments", getDepartmentById);
+const verifyToken = require("../middleware/authMiddleware");
+const allowRoles = require("../middleware/roleMiddleware");
+
+// ADMIN ONLY
+router.post("/", verifyToken, allowRoles("admin"), createDepartment);
+
+// AUTHENTICATED
+router.get("/", verifyToken, allowRoles("admin", "responder"), getAllDepartments);
+router.get("/:id", verifyToken, allowRoles("admin", "responder"), getDepartmentById);
 
 module.exports = router;

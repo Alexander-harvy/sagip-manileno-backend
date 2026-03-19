@@ -19,4 +19,8 @@ body:
     \  \"source\": \"mobile_app\"\r
 
     }\r\n"
+auth:
+  type: bearer
+  credentials:
+    token: ""
 order: 1773745464653

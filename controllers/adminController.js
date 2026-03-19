@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const AdminModel = require("../models/adminModel");
 
@@ -142,16 +143,30 @@ const getAdminById = async (req, res) => {
       });
     }
 
+     const token = jwt.sign(
+        {
+          id: admin.admin_id,
+          role: "admin",
+          dept_id: admin.dept_id,
+          contact_no: admin.contact_no,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+      );
+
     return res.status(200).json({
       success: true,
       message: "Admin logged in successfully",
       data: {
+        token,
+        admin: {
           admin_id: admin.admin_id,
           dept_id: admin.dept_id,
           first_name: admin.first_name,
           last_name: admin.last_name,
           contact_no: admin.contact_no,
-    },
+        },
+      },
     });
   } catch (error) {
     console.error("loginAdmin error:", error);

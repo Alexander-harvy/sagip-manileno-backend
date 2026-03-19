@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/userModel");
 
@@ -111,15 +112,27 @@ const loginUser = async (req, res) => {
       });
     }
 
+    const token = jwt.sign(
+      {
+        id: user.user_id,
+        role: "user",
+        contact_no: user.contact_no,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
     return res.status(200).json({
       success: true,
       message: "Login successful",
       data: {
-        user_id: user.user_id,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        contact_no: user.contact_no,
-      },
+        token,
+        user: {
+          user_id: user.user_id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          contact_no: user.contact_no,
+        }
+      }
     });
   } catch (error) {
     return res.status(500).json({

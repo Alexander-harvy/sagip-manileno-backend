@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const ResponderModel = require("../models/responderModel");
 
@@ -111,16 +112,28 @@ const loginResponder = async (req, res) => {
         message: "Invalid credentials",
       });
     }
-
-    return res.status(200).json({
+    const token = jwt.sign(
+      {
+        id: responder.responder_id,
+        role: "responder",
+        dept_id: responder.dept_id,
+        contact_no: responder.contact_no,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+return res.status(200).json({
   success: true,
   message: "Login successful",
   data: {
-    responder_id: responder.responder_id,
-    dept_id: responder.dept_id,
-    first_name: responder.first_name,
-    last_name: responder.last_name,
-    contact_no: responder.contact_no,
+    token,
+    responder: {
+      responder_id: responder.responder_id,
+      dept_id: responder.dept_id,
+      first_name: responder.first_name,
+      last_name: responder.last_name,
+      contact_no: responder.contact_no,
+    },
   },
 });
 

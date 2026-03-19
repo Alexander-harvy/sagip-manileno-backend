@@ -11,4 +11,8 @@ body:
     \  \"admin_id\": 1\r
 
     }"
+auth:
+  type: bearer
+  credentials:
+    token: ""
 order: 4414090142064316
