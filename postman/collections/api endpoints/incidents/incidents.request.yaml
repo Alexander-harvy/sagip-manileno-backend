@@ -1,6 +1,6 @@
 $kind: http-request
 name: incidents
-url: 'http://localhost:3000/api/incidents/1/assign'
+url: http://localhost:3000/api/incidents
 method: POST
 body:
   type: json
@@ -18,5 +18,9 @@ body:
 
     \  \"source\": \"mobile_app\"\r
 
-    }"
-order: 4234771464608237
+    }\r\n"
+auth:
+  type: bearer
+  credentials:
+    token: ""
+order: 1773745464653

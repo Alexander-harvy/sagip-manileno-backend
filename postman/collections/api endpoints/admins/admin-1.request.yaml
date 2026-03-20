@@ -1,0 +1,20 @@
+$kind: http-request
+name: admin
+url: http://localhost:3000/api/admins
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"dept_id\": 1,\r
+
+    \  \"first_name\": \"Juan\",\r
+
+    \  \"last_name\": \"Dela Cruz\",\r
+
+    \  \"contact_no\": \"09123456710\",\r
+
+    \  \"password\": \"admin123\"\r
+
+    }"
+order: 2457448531165115

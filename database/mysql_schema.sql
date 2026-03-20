@@ -13,7 +13,7 @@ CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `contact_no` varchar(20) NOT NULL,
+  `contact_no` varchar(20) NOT NULL UNIQUE,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -23,7 +23,7 @@ CREATE TABLE `emergency_unit_admin` (
   `dept_id` int NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `contact_no` varchar(20) NOT NULL,
+  `contact_no` varchar(20) NOT NULL UNIQUE,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`admin_id`),
   KEY `dept_id` (`dept_id`),
@@ -35,7 +35,8 @@ CREATE TABLE `responder` (
   `dept_id` int NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `contact_no` varchar(20) NOT NULL,
+  `contact_no` varchar(20) NOT NULL UNIQUE,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`responder_id`),
   KEY `dept_id` (`dept_id`),
   CONSTRAINT `responder_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `department` (`dept_id`)

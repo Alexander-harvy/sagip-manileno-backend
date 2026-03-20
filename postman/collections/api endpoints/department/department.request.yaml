@@ -1,0 +1,16 @@
+$kind: http-request
+name: department
+url: http://localhost:3000/api/departments
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"dept_name\": \"Manila Medic\",\r
+
+    \  \"dept_type\": \"Hospital\",\r
+
+    \  \"contact_no\": \"09123456789\"\r
+
+    }"
+order: 1773746098005

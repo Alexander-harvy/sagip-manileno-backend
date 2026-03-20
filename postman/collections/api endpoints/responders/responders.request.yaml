@@ -1,0 +1,24 @@
+$kind: http-request
+name: responders
+url: http://localhost:3000/api/responders
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"dept_id\": 1,\r
+
+    \  \"first_name\": \"Test\",\r
+
+    \  \"last_name\": \"Responder\",\r
+
+    \  \"contact_no\": \"09911112221\",\r
+
+    \  \"password\": \"responder123\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJhZG1pbiIsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsImlhdCI6MTc3MzkzOTI4NSwiZXhwIjoxNzc0MDI1Njg1fQ.IAazrGV8iPiXgpJFkBaEM3P2fmohxzbkvgrbbvfdUfY
+order: 1773746082330

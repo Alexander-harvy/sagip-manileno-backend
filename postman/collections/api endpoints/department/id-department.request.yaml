@@ -1,0 +1,5 @@
+$kind: http-request
+name: id-department
+url: http://localhost:3000/api/departments/1/Departments
+method: GET
+order: 3834225702879795

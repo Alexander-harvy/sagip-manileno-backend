@@ -29,6 +29,25 @@ const UserModel = {
     const [rows] = await db.execute(sql);
     return rows;
   },
-};
 
+  async getUserById(id) {
+    const sql = `
+      SELECT user_id, first_name, last_name, contact_no
+      FROM users
+      WHERE user_id = ?
+    `;
+
+    const [rows] = await db.execute(sql, [id]);
+    return rows[0];
+  },
+
+  async getUserByContactNo(contact_no) {
+  const [rows] = await db.execute(
+    `SELECT * FROM users WHERE contact_no = ?`,
+    [contact_no]
+  );
+  return rows[0];
+}
+
+};
 module.exports = UserModel;

@@ -1,0 +1,5 @@
+$kind: http-request
+name: assignments-incidents
+url: http://localhost:3000/api/incidents/4/assignments
+method: GET
+order: 4479491277822141

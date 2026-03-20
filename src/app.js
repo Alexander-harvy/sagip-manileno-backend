@@ -7,6 +7,9 @@ const healthRoutes = require("../routes/healthRoutes");
 const userRoutes = require("../routes/userRoutes");
 const responderRoutes = require("../routes/responderRoutes");
 const incidentRoutes = require("../routes/incidentRoutes");
+const adminRoutes = require("../routes/adminRoutes");
+const departmentRoutes = require("../routes/departmentRoutes");
+const offlineLogRoutes = require("../routes/offlinelogRoutes");
 
 app.use(express.json());
 
@@ -14,7 +17,9 @@ app.use("/api/health", healthRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/responders", responderRoutes);
 app.use("/api/incidents", incidentRoutes);
-
+app.use("/api/admins", adminRoutes);
+app.use("/api/departments", departmentRoutes);
+app.use("/api/offline-logs", offlineLogRoutes);
 
 app.get("/", (req, res) => {
   res.send("Sagip Manileno API is running");
