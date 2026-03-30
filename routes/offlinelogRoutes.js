@@ -1,19 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const {
-  createDepartment,
-  getAllDepartments,
-  getDepartmentById,
-} = require("../controllers/departmentController");
+const offlineLogController = require("../controllers/offlineLogController");
 
 const verifyToken = require("../middleware/authMiddleware");
 const allowRoles = require("../middleware/roleMiddleware");
 
-// ADMIN ONLY
-router.post("/", verifyToken, allowRoles("admin"), createDepartment);
+// PUBLIC (SMS/offline ingestion)
+router.post("/", offlineLogController.createOfflineLog);
 
-// AUTHENTICATED
-router.get("/", verifyToken, allowRoles("admin", "responder"), getAllDepartments);
-router.get("/:id", verifyToken, allowRoles("admin", "responder"), getDepartmentById);
+// ADMIN ONLY (view logs)
+router.get("/", verifyToken, allowRoles("admin"), offlineLogController.getAllOfflineLogs);
 
 module.exports = router;
