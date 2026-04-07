@@ -21,7 +21,8 @@ const adminRoutes = require("../routes/adminRoutes");
 
 
 app.use(express.json());
-app.use("/api/admins", adminRoutes);
+
+app.use("/api/admin", adminRoutes);
 app.use("/api/health", healthRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/responders", responderRoutes);

@@ -54,6 +54,7 @@ const IncidentModel = {
       FROM incident i
       JOIN users u ON i.user_id = u.user_id
       ORDER BY i.incident_id DESC
+      
     `;
 
     const [rows] = await db.execute(sql);
