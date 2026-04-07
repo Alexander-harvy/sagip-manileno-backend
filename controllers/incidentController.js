@@ -2,8 +2,7 @@ const IncidentModel = require("../models/incidentModel");
 const IncidentAssignmentModel = require("../models/incidentAssignmentModel");
 const IncidentStatusModel = require("../models/incidentStatusModel");
 
-
-// 🔥 CREATE INCIDENT (from mobile/user)
+// CREATE INCIDENT (from mobile/user)
 const createIncident = async (req, res) => {
   try {
     const {
@@ -39,12 +38,14 @@ const createIncident = async (req, res) => {
     });
   } catch (error) {
     console.error("Create Incident Error:", error);
-    res.status(500).json({ success: false });
+    res.status(500).json({
+      success: false,
+      message: "Failed to create incident",
+    });
   }
 };
 
-
-// 🔥 ASSIGN SUBSTATION (ERU ACTION)
+// ASSIGN SUBSTATION (ERU ACTION)
 const assignIncident = async (req, res) => {
   try {
     const { incident_id, substation_id } = req.body;
@@ -74,6 +75,7 @@ const assignIncident = async (req, res) => {
   }
 };
 
+// GET ALL INCIDENTS
 const getAllIncidents = async (req, res) => {
   try {
     const incidents = await IncidentModel.getAllIncidents();
@@ -84,10 +86,12 @@ const getAllIncidents = async (req, res) => {
     });
   } catch (error) {
     console.error("Get Incidents Error:", error);
-    res.status(500).json({ success: false });
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch incidents",
+    });
   }
 };
-
 
 module.exports = {
   createIncident,
