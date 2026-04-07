@@ -1,74 +1,63 @@
 const db = require("../config/db");
 
-const createAdmin = async ({ dept_id, first_name, last_name, contact_no, password }) => {
-  const [result] = await db.execute(
-    `INSERT INTO emergency_unit_admin 
+const AdminModel = {
+  async countAdmins() {
+    const sql = "SELECT COUNT(*) AS total FROM emergency_unit_admin";
+    const [rows] = await db.execute(sql);
+    return rows[0].total;
+  },
+
+  async createAdmin(data) {
+    const { dept_id, first_name, last_name, contact_no, password } = data;
+
+    const sql = `
+      INSERT INTO emergency_unit_admin
       (dept_id, first_name, last_name, contact_no, password)
-     VALUES (?, ?, ?, ?, ?)`,
-    [dept_id, first_name, last_name, contact_no, password]
-  );
+      VALUES (?, ?, ?, ?, ?)
+    `;
 
-  return result.insertId;
+    const [result] = await db.execute(sql, [
+      dept_id,
+      first_name,
+      last_name,
+      contact_no,
+      password,
+    ]);
+
+    return result;
+  },
+
+  async findByContactNo(contact_no) {
+    const sql = `
+      SELECT *
+      FROM emergency_unit_admin
+      WHERE contact_no = ?
+      LIMIT 1
+    `;
+
+    const [rows] = await db.execute(sql, [contact_no]);
+    return rows[0];
+  },
+
+  async getAllAdmins() {
+    const sql = `
+      SELECT admin_id, dept_id, first_name, last_name, contact_no
+      FROM emergency_unit_admin
+      ORDER BY admin_id DESC
+    `;
+    const [rows] = await db.execute(sql);
+    return rows;
+  },
+
+  async getAdminById(admin_id) {
+    const sql = `
+      SELECT admin_id, dept_id, first_name, last_name, contact_no
+      FROM emergency_unit_admin
+      WHERE admin_id = ?
+    `;
+    const [rows] = await db.execute(sql, [admin_id]);
+    return rows[0];
+  },
 };
 
-const getAllAdmins = async () => {
-  const [rows] = await db.execute(
-    `SELECT 
-        a.admin_id,
-        a.dept_id,
-        d.dept_name,
-        d.dept_type,
-        a.first_name,
-        a.last_name,
-        a.contact_no
-     FROM emergency_unit_admin a
-     INNER JOIN department d ON a.dept_id = d.dept_id
-     ORDER BY a.admin_id DESC`
-  );
-
-  return rows;
-};
-
-const getAdminById = async (admin_id) => {
-  const [rows] = await db.execute(
-    `SELECT 
-        a.admin_id,
-        a.dept_id,
-        d.dept_name,
-        d.dept_type,
-        a.first_name,
-        a.last_name,
-        a.contact_no
-     FROM emergency_unit_admin a
-     INNER JOIN department d ON a.dept_id = d.dept_id
-     WHERE a.admin_id = ?`,
-    [admin_id]
-  );
-
-  return rows[0];
-};
-
-const getDepartmentById = async (dept_id) => {
-  const [rows] = await db.execute(
-    `SELECT * FROM department WHERE dept_id = ?`,
-    [dept_id]
-  );
-
-  return rows[0];
-};
-
-const getAdminByContactNo = async (contact_no) => {
-  const [rows] = await db.execute(
-    `SELECT * FROM emergency_unit_admin WHERE contact_no = ?`,
-    [contact_no]
-  );
-  return rows[0];
-};
-
-module.exports = {
-  createAdmin,
-  getAllAdmins,
-  getAdminById,
-  getDepartmentById,
-  getAdminByContactNo,
-};
+module.exports = AdminModel;
