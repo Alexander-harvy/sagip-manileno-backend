@@ -58,11 +58,12 @@ CREATE TABLE `incident` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `incident_assignment` (
-  `assign_id` int NOT NULL AUTO_INCREMENT,
+  `assign_id` int NULL AUTO_INCREMENT,
   `incident_id` int NOT NULL,
-  `responder_id` int NOT NULL,
-  `admin_id` int NOT NULL,
-  `assigned_at` datetime DEFAULT NULL,
+  `responder_id` int DEFAULT NULL,
+  `admin_id` int NULL,
+  `assigned_at` datetime,
+  `substation_id` int DEFAULT NULL,
   PRIMARY KEY (`assign_id`),
   KEY `incident_id` (`incident_id`),
   KEY `responder_id` (`responder_id`),

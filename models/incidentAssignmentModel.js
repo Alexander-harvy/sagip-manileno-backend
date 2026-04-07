@@ -2,18 +2,26 @@ const db = require("../config/db");
 
 const IncidentAssignmentModel = {
   async createAssignment(data) {
-    const { incident_id, responder_id, admin_id, assigned_at } = data;
-
-    const sql = `
-      INSERT INTO incident_assignment (incident_id, responder_id, admin_id, assigned_at)
-      VALUES (?, ?, ?, ?)
-    `;
-
-    const [result] = await db.execute(sql, [
+    const {
       incident_id,
       responder_id,
       admin_id,
       assigned_at,
+      substation_id,
+    } = data;
+
+    const sql = `
+      INSERT INTO incident_assignment 
+      (incident_id, responder_id, admin_id, assigned_at, substation_id)
+      VALUES (?, ?, ?, ?, ?)
+    `;
+
+    const [result] = await db.execute(sql, [
+      incident_id,
+      responder_id || null,
+      admin_id || null,
+      assigned_at || new Date(),
+      substation_id || null,
     ]);
 
     return result;
@@ -30,10 +38,11 @@ const IncidentAssignmentModel = {
         ia.admin_id,
         a.first_name AS admin_first_name,
         a.last_name AS admin_last_name,
-        ia.assigned_at
+        ia.assigned_at,
+        ia.substation_id
       FROM incident_assignment ia
-      JOIN responder r ON ia.responder_id = r.responder_id
-      JOIN emergency_unit_admin a ON ia.admin_id = a.admin_id
+      LEFT JOIN responder r ON ia.responder_id = r.responder_id
+      LEFT JOIN emergency_unit_admin a ON ia.admin_id = a.admin_id
       WHERE ia.incident_id = ?
       ORDER BY ia.assign_id DESC
     `;
