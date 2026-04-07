@@ -9,6 +9,6 @@ const allowRoles = require("../middleware/roleMiddleware");
 router.post("/", offlineLogController.createOfflineLog);
 
 // ADMIN ONLY (view logs)
-router.get("/", verifyToken, allowRoles("admin"), offlineLogController.getAllOfflineLogs);
+router.get("/", verifyToken, allowRoles("ERU_ADMIN"), offlineLogController.getAllOfflineLogs);
 
 module.exports = router;

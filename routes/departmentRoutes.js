@@ -10,10 +10,10 @@ const verifyToken = require("../middleware/authMiddleware");
 const allowRoles = require("../middleware/roleMiddleware");
 
 // ADMIN ONLY
-router.post("/", verifyToken, allowRoles("admin"), createDepartment);
+router.post("/", verifyToken, allowRoles("ERU_ADMIN"), createDepartment);
 
 // AUTHENTICATED
-router.get("/", verifyToken, allowRoles("admin", "responder"), getAllDepartments);
-router.get("/:id", verifyToken, allowRoles("admin", "responder"), getDepartmentById);
+router.get("/", verifyToken, allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"), getAllDepartments);
+router.get("/:id", verifyToken, allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"), getDepartmentById);
 
 module.exports = router;

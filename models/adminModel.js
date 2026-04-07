@@ -7,25 +7,26 @@ const AdminModel = {
     return rows[0].total;
   },
 
-  async createAdmin(data) {
-    const { dept_id, first_name, last_name, contact_no, password } = data;
+async createAdmin(data) {
+  const { dept_id, first_name, last_name, contact_no, password, role } = data;
 
-    const sql = `
-      INSERT INTO emergency_unit_admin
-      (dept_id, first_name, last_name, contact_no, password)
-      VALUES (?, ?, ?, ?, ?)
-    `;
+  const sql = `
+    INSERT INTO emergency_unit_admin
+    (dept_id, first_name, last_name, contact_no, password, role)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
 
-    const [result] = await db.execute(sql, [
-      dept_id,
-      first_name,
-      last_name,
-      contact_no,
-      password,
-    ]);
+  const [result] = await db.execute(sql, [
+    dept_id,
+    first_name,
+    last_name,
+    contact_no,
+    password,
+    role || "SUBSTATION_ADMIN",
+  ]);
 
-    return result;
-  },
+  return result;
+},
 
   async findByContactNo(contact_no) {
     const sql = `

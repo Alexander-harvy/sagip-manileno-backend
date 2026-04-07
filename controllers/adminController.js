@@ -4,7 +4,7 @@ const AdminModel = require("../models/adminModel");
 
 const bootstrapAdmin = async (req, res) => {
   try {
-    const { dept_id, first_name, last_name, contact_no, password } = req.body;
+    const { dept_id, first_name, last_name, contact_no, password, role } = req.body;
 
     if (!dept_id || !first_name || !last_name || !contact_no || !password) {
       return res.status(400).json({
@@ -30,6 +30,7 @@ const bootstrapAdmin = async (req, res) => {
       last_name,
       contact_no,
       password: hashedPassword,
+      role,
     });
 
     res.status(201).json({
@@ -86,7 +87,7 @@ const loginAdmin = async (req, res) => {
         admin_id: admin.admin_id,
         dept_id: admin.dept_id,
         contact_no: admin.contact_no,
-        role: "admin",
+        role: admin.role,
       },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
@@ -97,11 +98,12 @@ const loginAdmin = async (req, res) => {
       message: "Admin login successful",
       token,
       data: {
-        admin_id: admin.admin_id,
-        dept_id: admin.dept_id,
-        first_name: admin.first_name,
-        last_name: admin.last_name,
-        contact_no: admin.contact_no,
+      admin_id: admin.admin_id,
+      dept_id: admin.dept_id,
+      first_name: admin.first_name,
+      last_name: admin.last_name,
+      contact_no: admin.contact_no,
+      role: admin.role,
       },
     });
   } catch (error) {
@@ -143,6 +145,7 @@ const createAdmin = async (req, res) => {
         first_name,
         last_name,
         contact_no,
+        role,
       },
     });
   } catch (error) {

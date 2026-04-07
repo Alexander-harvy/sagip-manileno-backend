@@ -25,6 +25,7 @@ CREATE TABLE `emergency_unit_admin` (
   `last_name` varchar(50) NOT NULL,
   `contact_no` varchar(20) NOT NULL UNIQUE,
   `password` varchar(255) NOT NULL,
+  `role` ENUM('ERU_ADMIN', 'SUBSTATION_ADMIN') NOT NULL DEFAULT 'SUBSTATION_ADMIN',
   PRIMARY KEY (`admin_id`),
   KEY `dept_id` (`dept_id`),
   CONSTRAINT `emergency_unit_admin_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `department` (`dept_id`)

@@ -9,12 +9,12 @@ const allowRoles = require("../middleware/roleMiddleware");
 router.post("/login", responderController.loginResponder);
 
 // ADMIN ONLY (create responder)
-router.post("/", verifyToken, allowRoles("admin"), responderController.createResponder);
+router.post("/", verifyToken, allowRoles("ERU_ADMIN"), responderController.createResponder);
 
 // ADMIN + RESPONDER
-router.get("/", verifyToken, allowRoles("admin", "responder"), responderController.getAllResponders);
+router.get("/", verifyToken, allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"), responderController.getAllResponders);
 
 // ALL AUTHENTICATED
-router.get("/:id", verifyToken, allowRoles("admin", "responder"), responderController.getResponderById);
+router.get("/:id", verifyToken, allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"), responderController.getResponderById);
 
 module.exports = router;
