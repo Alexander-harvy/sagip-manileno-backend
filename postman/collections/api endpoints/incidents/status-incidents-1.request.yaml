@@ -2,4 +2,8 @@ $kind: http-request
 name: status-incidents
 url: http://localhost:3000/api/incidents/1/status
 method: GET
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJyZXNwb25kZXIiLCJkZXB0X2lkIjoxLCJjb250YWN0X25vIjoiMDk5MTExMTIyMjIiLCJpYXQiOjE3NzQ3MzU4MTYsImV4cCI6MTc3NDgyMjIxNn0.VCYPPeddze_c53uc83rZuWbYdridSjLhHwgXzT_ovXc
 order: 4484198893622777

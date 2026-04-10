@@ -17,4 +17,8 @@ body:
     \  \"longitude\": 120.9667\r
 
     }"
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJhZG1pbiIsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsImlhdCI6MTc3NDYyNDYyMCwiZXhwIjoxNzc0NzExMDIwfQ.OA6wzU-yAUFkN0ffhTn3GAx1iBxQZJQvmjGfFLiHo04
 order: 3733485299613656

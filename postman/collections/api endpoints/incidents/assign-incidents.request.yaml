@@ -1,6 +1,6 @@
 $kind: http-request
 name: assign-incidents
-url: http://localhost:3000/api/incidents/4/assign
+url: http://localhost:3000/api/incidents/1/assign
 method: POST
 body:
   type: json
@@ -14,5 +14,5 @@ body:
 auth:
   type: bearer
   credentials:
-    token: ""
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsInJvbGUiOiJFUlVfQURNSU4iLCJpYXQiOjE3NzU4MTU2NjUsImV4cCI6MTc3NTkwMjA2NX0.g0GaFpbYfm2AJk5XIHSJzJlZEJ5TQIEQR-nDOELqHYA
 order: 4414090142064316

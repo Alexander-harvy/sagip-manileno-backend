@@ -51,7 +51,7 @@ async createAdmin(data) {
 
   async getAllAdmins() {
     const sql = `
-      SELECT admin_id, dept_id, first_name, last_name, contact_no
+      SELECT admin_id, dept_id, first_name, last_name, contact_no, role
       FROM emergency_unit_admin
       ORDER BY admin_id DESC
     `;

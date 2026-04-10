@@ -15,7 +15,7 @@ CREATE TABLE `users` (
   `last_name` varchar(50) NOT NULL,
   `contact_no` varchar(20) NOT NULL UNIQUE,
   `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`)   
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `emergency_unit_admin` (
