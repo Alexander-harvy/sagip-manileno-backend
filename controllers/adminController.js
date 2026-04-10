@@ -117,7 +117,7 @@ const loginAdmin = async (req, res) => {
 
 const createAdmin = async (req, res) => {
   try {
-    const { dept_id, first_name, last_name, contact_no, password } = req.body;
+    const { dept_id, first_name, last_name, contact_no, password, role} = req.body;
 
     if (!dept_id || !first_name || !last_name || !contact_no || !password) {
       return res.status(400).json({
@@ -134,6 +134,7 @@ const createAdmin = async (req, res) => {
       last_name,
       contact_no,
       password: hashedPassword,
+      role,
     });
 
     res.status(201).json({

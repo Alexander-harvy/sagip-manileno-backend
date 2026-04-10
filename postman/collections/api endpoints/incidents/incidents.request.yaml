@@ -22,5 +22,5 @@ body:
 auth:
   type: bearer
   credentials:
-    token: ""
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsInJvbGUiOiJ1c2VyIiwiY29udGFjdF9ubyI6IjA5Mzk0MjI4NjExIiwiaWF0IjoxNzc1ODE1NDQyLCJleHAiOjE3NzU5MDE4NDJ9.t3rHGGtwGXa3YlWXhTRozB4R6yseqT7oFvjZxJwOt5M
 order: 1773745464653

@@ -18,16 +18,18 @@ const incidentRoutes = require("../routes/incidentRoutes");
 const departmentRoutes = require("../routes/departmentRoutes");
 const offlineLogRoutes = require("../routes/offlinelogRoutes");
 const adminRoutes = require("../routes/adminRoutes");
+const substationRoutes = require("../routes/substationRoutes");
 
 
 app.use(express.json());
 
-app.use("/api/admin", adminRoutes);
+//app.use("/api/admin", adminRoutes);
 app.use("/api/health", healthRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/responders", responderRoutes);
 app.use("/api/incidents", incidentRoutes);
-//app.use("/api/admins", adminRoutes);
+app.use("/api/substations", substationRoutes);
+app.use("/api/admins", adminRoutes);
 app.use("/api/departments", departmentRoutes);
 app.use("/api/offline-logs", offlineLogRoutes);
 

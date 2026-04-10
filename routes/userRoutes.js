@@ -10,9 +10,9 @@ router.post('/', userController.createUser);
 router.post('/login', userController.loginUser);
 
 // ADMIN ONLY
-router.get('/', verifyToken, allowRoles("admin"), userController.getAllUsers);
+router.get('/', verifyToken, allowRoles("ERU_ADMIN"), userController.getAllUsers);
 
 // AUTHENTICATED USER
-router.get('/:id', verifyToken, allowRoles("admin", "user"), userController.getUserById);
+router.get('/:id', verifyToken, allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"), userController.getUserById);
 
 module.exports = router;

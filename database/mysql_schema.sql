@@ -96,3 +96,15 @@ CREATE TABLE `offline_log` (
   PRIMARY KEY (`offlineLog_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `substation` (
+  `substation_id` int NOT NULL AUTO_INCREMENT,
+  `department_id` int NOT NULL,
+  `substation_name` varchar(150) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`substation_id`),
+  KEY `fk_substation_department` (`department_id`),
+  CONSTRAINT `fk_substation_department` FOREIGN KEY (`department_id`) REFERENCES `department` (`dept_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+

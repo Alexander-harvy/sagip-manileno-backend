@@ -2,4 +2,8 @@ $kind: http-request
 name: offline-logs
 url: http://localhost:3000/api/offline-logs
 method: GET
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJhZG1pbiIsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsImlhdCI6MTc3NTMwNTU4NywiZXhwIjoxNzc1MzkxOTg3fQ.1Wi5wllIQDlmUzkpzHC8n40NUgvzt187PP2d4YFmZYE
 order: 1773745444289

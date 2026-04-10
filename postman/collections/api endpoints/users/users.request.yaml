@@ -2,4 +2,8 @@ $kind: http-request
 name: users
 url: http://localhost:3000/api/users
 method: GET
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJhZG1pbiIsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsImlhdCI6MTc3NDk0NTc1MywiZXhwIjoxNzc1MDMyMTUzfQ.wS0fQMz2900kJ5IF7_m3scNgXlmu-tVzkPKUUHZqiCM
 order: 1773745913213
