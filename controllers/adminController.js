@@ -2,14 +2,15 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const AdminModel = require("../models/adminModel");
 
+
 const bootstrapAdmin = async (req, res) => {
   try {
     const { dept_id, first_name, last_name, contact_no, password, role } = req.body;
 
-    if (!dept_id || !first_name || !last_name || !contact_no || !password) {
+    if (!dept_id || !first_name || !last_name || !contact_no || !password || !role) {
       return res.status(400).json({
         success: false,
-        message: "dept_id, first_name, last_name, contact_no, and password are required",
+        message: "dept_id, first_name, last_name, contact_no, password, and role are required",
       });
     }
 
@@ -117,9 +118,9 @@ const loginAdmin = async (req, res) => {
 
 const createAdmin = async (req, res) => {
   try {
-    const { dept_id, first_name, last_name, contact_no, password } = req.body;
+    const { dept_id, first_name, last_name, contact_no, password, role } = req.body;
 
-    if (!dept_id || !first_name || !last_name || !contact_no || !password) {
+    if (!dept_id || !first_name || !last_name || !contact_no || !password || !role) {
       return res.status(400).json({
         success: false,
         message: "dept_id, first_name, last_name, contact_no, and password are required",
@@ -134,6 +135,7 @@ const createAdmin = async (req, res) => {
       last_name,
       contact_no,
       password: hashedPassword,
+      role,
     });
 
     res.status(201).json({

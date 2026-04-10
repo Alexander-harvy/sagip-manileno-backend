@@ -10,6 +10,15 @@ const AdminModel = {
 async createAdmin(data) {
   const { dept_id, first_name, last_name, contact_no, password, role } = data;
 
+    console.log("DATA CHECK:", {
+    dept_id,
+    first_name,
+    last_name,
+    contact_no,
+    password,
+    role
+  });
+  
   const sql = `
     INSERT INTO emergency_unit_admin
     (dept_id, first_name, last_name, contact_no, password, role)
@@ -22,7 +31,7 @@ async createAdmin(data) {
     last_name,
     contact_no,
     password,
-    role || "SUBSTATION_ADMIN",
+    role
   ]);
 
   return result;

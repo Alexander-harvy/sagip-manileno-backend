@@ -3,6 +3,7 @@ const IncidentAssignmentModel = require("../models/incidentAssignmentModel");
 const IncidentStatusModel = require("../models/incidentStatusModel");
 
 // CREATE INCIDENT (from mobile/user)
+
 const createIncident = async (req, res) => {
   try {
     const {
