@@ -1,0 +1,24 @@
+$kind: http-request
+name: offline-logs
+url: http://localhost:3000/api/offline-logs
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"sender_no\": \"09171234567\",\r
+
+    \  \"message_cont\": \"HELP FIRE AT TONDO\",\r
+
+    \  \"receive_at\": \"2026-03-13 15:30:00\",\r
+
+    \  \"latitude\": 14.6167,\r
+
+    \  \"longitude\": 120.9667\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJhZG1pbiIsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsImlhdCI6MTc3NDYyNDYyMCwiZXhwIjoxNzc0NzExMDIwfQ.OA6wzU-yAUFkN0ffhTn3GAx1iBxQZJQvmjGfFLiHo04
+order: 3733485299613656

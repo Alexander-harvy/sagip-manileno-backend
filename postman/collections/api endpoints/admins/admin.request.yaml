@@ -1,0 +1,9 @@
+$kind: http-request
+name: admin
+url: http://localhost:3000/api/admins
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsInJvbGUiOiJFUlVfQURNSU4iLCJpYXQiOjE3NzU4MjAyODAsImV4cCI6MTc3NTkwNjY4MH0.cmzibsqqlJelrfGrkG9Py87r1rgkWvQyeZzr62HFleQ
+order: 1773746005817

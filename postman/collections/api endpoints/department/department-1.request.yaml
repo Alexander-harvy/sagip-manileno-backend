@@ -1,0 +1,9 @@
+$kind: http-request
+name: department
+url: http://localhost:3000/api/departments
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsInJvbGUiOiJFUlVfQURNSU4iLCJpYXQiOjE3NzU4MjIyOTIsImV4cCI6MTc3NTkwODY5Mn0.VwjRG85q5lLIiQJ8zfi-C-ixF2FacL1UNiYFFBqS6eA
+order: 3069376300529554

@@ -1,0 +1,5 @@
+$kind: http-request
+name: responders
+url: http://localhost:3000/api/responders
+method: GET
+order: 3144987186460205

@@ -1,0 +1,14 @@
+$kind: http-request
+name: Admin Log in
+url: http://localhost:3000/api/admins/login
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"contact_no\": \"09394228613\",\r
+
+    \    \"password\": \"admin123\"\r
+
+    }"
+order: 1775465648610
