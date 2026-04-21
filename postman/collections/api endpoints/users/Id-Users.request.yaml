@@ -2,4 +2,8 @@ $kind: http-request
 name: Id-Users
 url: http://localhost:3000/api/users/8/Users
 method: GET
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsInJvbGUiOiJFUlVfQURNSU4iLCJpYXQiOjE3NzU4MjgwNjUsImV4cCI6MTc3NTkxNDQ2NX0.n5TYE7z0fqwViAuvlfYa2ajBmajh2qk8U2YAZhhLZHI
 order: 1172036845611629

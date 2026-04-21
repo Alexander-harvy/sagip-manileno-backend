@@ -50,6 +50,26 @@ const IncidentAssignmentModel = {
     const [rows] = await db.execute(sql, [incident_id]);
     return rows;
   },
+
+  async getAllAssignments() {
+  const sql = `
+    SELECT 
+      ia.assign_id,
+      ia.incident_id,
+      ia.substation_id,
+      s.substation_name,
+      ia.admin_id,
+      ia.assigned_at
+    FROM incident_assignment ia
+    LEFT JOIN substation s 
+      ON ia.substation_id = s.substation_id
+    ORDER BY ia.assign_id DESC
+  `;
+
+  const [rows] = await db.execute(sql);
+  return rows;
+}
+
 };
 
 module.exports = IncidentAssignmentModel;

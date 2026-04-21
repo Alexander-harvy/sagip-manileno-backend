@@ -174,6 +174,8 @@ const getAllIncidents = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   createIncident,
   assignIncident,
