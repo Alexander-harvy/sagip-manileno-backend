@@ -59,6 +59,7 @@ async getAllIncidents() {
       ia.admin_id,
       ia.assigned_at,
 
+      st.responder_id AS responder_id,
       st.status,
       st.timestamp AS status_timestamp
 

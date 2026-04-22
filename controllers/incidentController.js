@@ -34,6 +34,13 @@ const createIncident = async (req, res) => {
       source: source || "mobile_app",
     });
 
+    await IncidentStatusModel.createStatus({
+      incident_id: result.insertId,
+      responder_id: null,
+      status: "pending",
+      timestamp: new Date(),
+    });
+
     return res.status(201).json({
       success: true,
       message: "Incident created successfully",
@@ -156,6 +163,96 @@ const assignIncident = async (req, res) => {
   }
 };
 
+const updateIncidentStatus = async (req, res) => {
+  try {
+    const { incident_id, status, responder_id } = req.body;
+
+    if (!incident_id || !status) {
+      return res.status(400).json({
+        success: false,
+        message: "incident_id and status are required",
+      });
+    }
+
+    if (isNaN(Number(incident_id))) {
+      return res.status(400).json({
+        success: false,
+        message: "incident_id must be a valid number",
+      });
+    }
+
+    const incident = await IncidentModel.getIncidentById(incident_id);
+
+    if (!incident) {
+      return res.status(404).json({
+        success: false,
+        message: "Incident not found",
+      });
+    }
+
+    const allowedStatuses = [
+      "assigned_to_substation",
+      "responder_assigned",
+      "en_route",
+      "on_scene",
+      "resolved",
+    ];
+
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid status value",
+      });
+    }
+
+    const responderRequiredStatuses = [
+      "responder_assigned",
+      "en_route",
+      "on_scene",
+      "resolved",
+    ];
+
+    if (responderRequiredStatuses.includes(status)) {
+      if (!responder_id) {
+        return res.status(400).json({
+          success: false,
+          message: "responder_id is required for this status",
+        });
+      }
+
+      if (isNaN(Number(responder_id))) {
+        return res.status(400).json({
+          success: false,
+          message: "responder_id must be a valid number",
+        });
+      }
+    }
+
+    await IncidentStatusModel.createStatus({
+      incident_id: Number(incident_id),
+      responder_id: responder_id ? Number(responder_id) : null,
+      status,
+      timestamp: new Date(),
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Status updated successfully",
+      data: {
+        incident_id: Number(incident_id),
+        responder_id: responder_id ? Number(responder_id) : null,
+        status,
+      },
+    });
+  } catch (error) {
+    console.error("Update Status Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};
+
 // GET ALL INCIDENTS
 const getAllIncidents = async (req, res) => {
   try {
@@ -179,5 +276,6 @@ const getAllIncidents = async (req, res) => {
 module.exports = {
   createIncident,
   assignIncident,
+  updateIncidentStatus,
   getAllIncidents,
 };

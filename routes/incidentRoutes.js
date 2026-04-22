@@ -23,6 +23,11 @@ router.post(
   incidentController.assignIncident
 );
 
-
+router.post(
+  "/status",
+  verifyToken,
+  allowRoles("SUBSTATION_ADMIN", "responder"),
+  incidentController.updateIncidentStatus
+)
 
 module.exports = router;
