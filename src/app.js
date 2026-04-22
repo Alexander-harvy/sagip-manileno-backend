@@ -17,7 +17,7 @@ const incidentRoutes = require("../routes/incidentRoutes");
 const adminRoutes = require("../routes/adminRoutes");
 const departmentRoutes = require("../routes/departmentRoutes");
 const offlineLogRoutes = require("../routes/offlinelogRoutes");
-const adminRoutes = require("../routes/adminRoutes");
+//const adminRoutes = require("../routes/adminRoutes");
 const substationRoutes = require("../routes/substationRoutes");
 
 
