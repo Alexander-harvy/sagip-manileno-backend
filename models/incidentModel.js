@@ -63,8 +63,9 @@ const IncidentModel = {
         ia.admin_id,
         ia.assigned_at,
 
-        st.status,
-        st.timestamp AS status_timestamp
+      st.responder_id AS responder_id,
+      st.status,
+      st.timestamp AS status_timestamp
 
       FROM incident i
       JOIN users u ON i.user_id = u.user_id
