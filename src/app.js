@@ -17,14 +17,11 @@ const incidentRoutes = require("../routes/incidentRoutes");
 const adminRoutes = require("../routes/adminRoutes");
 const departmentRoutes = require("../routes/departmentRoutes");
 const offlineLogRoutes = require("../routes/offlinelogRoutes");
-//const adminRoutes = require("../routes/adminRoutes");
 const substationRoutes = require("../routes/substationRoutes");
 
 
-
 app.use(express.json());
-
-//app.use("/api/admin", adminRoutes);
+  
 app.use("/api/health", healthRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/responders", responderRoutes);

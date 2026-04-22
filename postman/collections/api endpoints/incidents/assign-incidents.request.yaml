@@ -1,18 +1,18 @@
 $kind: http-request
 name: assign-incidents
-url: http://localhost:3000/api/incidents/1/assign
+url: http://localhost:3000/api/incidents/assign
 method: POST
 body:
   type: json
-  content: "{\r
+  content: "{ \r
 
-    \  \"responder_id\":13,\r
+    \  \"incident_id\":15,\r
 
-    \  \"admin_id\": 1\r
+    \  \"substation_id\": 1\r
 
     }"
 auth:
   type: bearer
   credentials:
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsInJvbGUiOiJFUlVfQURNSU4iLCJpYXQiOjE3NzU4MTU2NjUsImV4cCI6MTc3NTkwMjA2NX0.g0GaFpbYfm2AJk5XIHSJzJlZEJ5TQIEQR-nDOELqHYA
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsInJvbGUiOiJFUlVfQURNSU4iLCJpYXQiOjE3NzU4MjgwNjUsImV4cCI6MTc3NTkxNDQ2NX0.n5TYE7z0fqwViAuvlfYa2ajBmajh2qk8U2YAZhhLZHI
 order: 4414090142064316
