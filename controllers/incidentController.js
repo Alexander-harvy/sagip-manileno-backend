@@ -4,7 +4,6 @@ const IncidentStatusModel = require("../models/incidentStatusModel");
 const SubstationModel = require("../models/substationModel");
 
 // CREATE INCIDENT (from mobile/user)
-
 const createIncident = async (req, res) => {
   try {
     const {
@@ -12,6 +11,7 @@ const createIncident = async (req, res) => {
       incident_type,
       latitude,
       longitude,
+      location_name,
       description,
       reported_at,
       source,
@@ -24,14 +24,18 @@ const createIncident = async (req, res) => {
       });
     }
 
+    const finalReportedAt = reported_at || new Date();
+    const finalSource = source || "mobile_app";
+
     const result = await IncidentModel.createIncident({
       user_id,
       incident_type,
       latitude: latitude ?? null,
       longitude: longitude ?? null,
+      location_name: location_name ?? null,
       description,
-      reported_at: reported_at || new Date(),
-      source: source || "mobile_app",
+      reported_at: finalReportedAt,
+      source: finalSource,
     });
 
     return res.status(201).json({
@@ -43,9 +47,10 @@ const createIncident = async (req, res) => {
         incident_type,
         latitude: latitude ?? null,
         longitude: longitude ?? null,
+        location_name: location_name ?? null,
         description,
-        reported_at: reported_at || new Date(),
-        source: source || "mobile_app",
+        reported_at: finalReportedAt,
+        source: finalSource,
       },
     });
   } catch (error) {
@@ -141,6 +146,7 @@ const assignIncident = async (req, res) => {
         incident_id: Number(incident_id),
         incident_type: incident.incident_type,
         description: incident.description,
+        location_name: incident.location_name ?? null,
         substation_id: Number(substation_id),
         substation_name: substation.substation_name,
         substation_address: substation.address,
@@ -173,8 +179,6 @@ const getAllIncidents = async (req, res) => {
     });
   }
 };
-
-
 
 module.exports = {
   createIncident,

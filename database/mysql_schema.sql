@@ -52,6 +52,7 @@ CREATE TABLE `incident` (
   `description` text,
   `reported_at` datetime DEFAULT NULL,
   `source` varchar(50) DEFAULT NULL,
+  `location_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`incident_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `incident_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
@@ -104,6 +105,8 @@ CREATE TABLE `substation` (
   `substation_name` varchar(150) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `latitude` decimal(10,7) DEFAULT NULL,
+  `longitude` decimal(10,7) DEFAULT NULL,
   PRIMARY KEY (`substation_id`),
   KEY `fk_substation_department` (`department_id`),
   CONSTRAINT `fk_substation_department` FOREIGN KEY (`department_id`) REFERENCES `department` (`dept_id`) ON DELETE CASCADE ON UPDATE CASCADE
