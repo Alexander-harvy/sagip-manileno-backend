@@ -21,27 +21,40 @@ CREATE TABLE `users` (
 CREATE TABLE `emergency_unit_admin` (
   `admin_id` int NOT NULL AUTO_INCREMENT,
   `dept_id` int NOT NULL,
+  `substation_id` int DEFAULT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(150) DEFAULT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `contact_no` varchar(20) NOT NULL UNIQUE,
+  `contact_no` varchar(20) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` ENUM('ERU_ADMIN', 'SUBSTATION_ADMIN') NOT NULL DEFAULT 'SUBSTATION_ADMIN',
+  `role` enum('ERU_ADMIN','SUBSTATION_ADMIN') NOT NULL DEFAULT 'SUBSTATION_ADMIN',
   PRIMARY KEY (`admin_id`),
+  UNIQUE KEY `contact_no` (`contact_no`),
+  UNIQUE KEY `contact_no_2` (`contact_no`),
+  UNIQUE KEY `unique_admin_username` (`username`),
+  UNIQUE KEY `unique_admin_email` (`email`),
   KEY `dept_id` (`dept_id`),
   CONSTRAINT `emergency_unit_admin_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `department` (`dept_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `responder` (
   `responder_id` int NOT NULL AUTO_INCREMENT,
   `dept_id` int NOT NULL,
+  `substation_id` int DEFAULT NULL,
+  `employee_no` varchar(50) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `contact_no` varchar(20) NOT NULL UNIQUE,
+  `contact_no` varchar(20) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`responder_id`),
+  UNIQUE KEY `contact_no` (`contact_no`),
+  UNIQUE KEY `unique_responder_username` (`username`),
   KEY `dept_id` (`dept_id`),
   CONSTRAINT `responder_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `department` (`dept_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 CREATE TABLE `incident` (
   `incident_id` int NOT NULL AUTO_INCREMENT,
@@ -77,7 +90,7 @@ CREATE TABLE `incident_assignment` (
 CREATE TABLE `incident_status` (
   `status_log_id` int NOT NULL AUTO_INCREMENT,
   `incident_id` int NOT NULL,
-  `responder_id` int NOT NULL,
+  `responder_id` int DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `timestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`status_log_id`),
@@ -85,7 +98,7 @@ CREATE TABLE `incident_status` (
   KEY `responder_id` (`responder_id`),
   CONSTRAINT `incident_status_ibfk_1` FOREIGN KEY (`incident_id`) REFERENCES `incident` (`incident_id`),
   CONSTRAINT `incident_status_ibfk_2` FOREIGN KEY (`responder_id`) REFERENCES `responder` (`responder_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `offline_log` (
   `offlineLog_id` int NOT NULL AUTO_INCREMENT,

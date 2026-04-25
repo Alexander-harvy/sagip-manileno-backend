@@ -25,7 +25,7 @@ const createIncident = async (req, res) => {
     }
 
     const finalReportedAt = reported_at || new Date();
-    const finalSource = source || "mobile_app";
+    const finalSource = source || "api";
 
     const result = await IncidentModel.createIncident({
       user_id,

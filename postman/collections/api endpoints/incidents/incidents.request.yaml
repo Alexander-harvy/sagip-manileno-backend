@@ -14,11 +14,13 @@ body:
 
     \  \"longitude\": 120.9842,\r
 
+    \  \"location_name\": \"Sta. Cruz, Manila\",\r
+
     \  \"description\": \"Fire spreading in residential building\",\r
 
-    \  \"source\": \"SMS\"\r
+    \  \"source\": \"mobile_app\"\r
 
-    }\r\n"
+    }"
 auth:
   type: bearer
   credentials:

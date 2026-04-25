@@ -1,13 +1,33 @@
 const express = require("express");
 const router = express.Router();
+
 const adminController = require("../controllers/adminController");
-const { assignIncident } = require("../controllers/incidentController");
+
+const verifyToken = require("../middleware/authMiddleware");
+const allowRoles = require("../middleware/roleMiddleware");
 
 router.post("/bootstrap", adminController.bootstrapAdmin);
 router.post("/login", adminController.loginAdmin);
-router.post("/", adminController.createAdmin);
-router.get("/", adminController.getAllAdmins);
-router.get("/:id", adminController.getAdminById);
-router.post("/assign", assignIncident);
+
+router.post(
+  "/",
+  verifyToken,
+  allowRoles("ERU_ADMIN"),
+  adminController.createAdmin
+);
+
+router.get(
+  "/",
+  verifyToken,
+  allowRoles("ERU_ADMIN"),
+  adminController.getAllAdmins
+);
+
+router.get(
+  "/:id",
+  verifyToken,
+  allowRoles("ERU_ADMIN"),
+  adminController.getAdminById
+);
 
 module.exports = router;
