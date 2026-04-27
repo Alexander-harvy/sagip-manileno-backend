@@ -4,7 +4,6 @@ const IncidentStatusModel = require("../models/incidentStatusModel");
 const SubstationModel = require("../models/substationModel");
 
 // CREATE INCIDENT (from mobile/user)
-
 const createIncident = async (req, res) => {
   try {
     const {
@@ -12,6 +11,7 @@ const createIncident = async (req, res) => {
       incident_type,
       latitude,
       longitude,
+      location_name,
       description,
       reported_at,
       source,
@@ -24,14 +24,25 @@ const createIncident = async (req, res) => {
       });
     }
 
+    const finalReportedAt = reported_at || new Date();
+    const finalSource = source || "api";
+
     const result = await IncidentModel.createIncident({
       user_id,
       incident_type,
       latitude: latitude ?? null,
       longitude: longitude ?? null,
+      location_name: location_name ?? null,
       description,
-      reported_at: reported_at || new Date(),
-      source: source || "mobile_app",
+      reported_at: finalReportedAt,
+      source: finalSource,
+    });
+
+    await IncidentStatusModel.createStatus({
+      incident_id: result.insertId,
+      responder_id: null,
+      status: "pending",
+      timestamp: new Date(),
     });
 
     return res.status(201).json({
@@ -43,9 +54,10 @@ const createIncident = async (req, res) => {
         incident_type,
         latitude: latitude ?? null,
         longitude: longitude ?? null,
+        location_name: location_name ?? null,
         description,
-        reported_at: reported_at || new Date(),
-        source: source || "mobile_app",
+        reported_at: finalReportedAt,
+        source: finalSource,
       },
     });
   } catch (error) {
@@ -141,6 +153,7 @@ const assignIncident = async (req, res) => {
         incident_id: Number(incident_id),
         incident_type: incident.incident_type,
         description: incident.description,
+        location_name: incident.location_name ?? null,
         substation_id: Number(substation_id),
         substation_name: substation.substation_name,
         substation_address: substation.address,
@@ -149,6 +162,96 @@ const assignIncident = async (req, res) => {
     });
   } catch (error) {
     console.error("Assign Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};
+
+const updateIncidentStatus = async (req, res) => {
+  try {
+    const { incident_id, status, responder_id } = req.body;
+
+    if (!incident_id || !status) {
+      return res.status(400).json({
+        success: false,
+        message: "incident_id and status are required",
+      });
+    }
+
+    if (isNaN(Number(incident_id))) {
+      return res.status(400).json({
+        success: false,
+        message: "incident_id must be a valid number",
+      });
+    }
+
+    const incident = await IncidentModel.getIncidentById(incident_id);
+
+    if (!incident) {
+      return res.status(404).json({
+        success: false,
+        message: "Incident not found",
+      });
+    }
+
+    const allowedStatuses = [
+      "assigned_to_substation",
+      "responder_assigned",
+      "en_route",
+      "on_scene",
+      "resolved",
+    ];
+
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid status value",
+      });
+    }
+
+    const responderRequiredStatuses = [
+      "responder_assigned",
+      "en_route",
+      "on_scene",
+      "resolved",
+    ];
+
+    if (responderRequiredStatuses.includes(status)) {
+      if (!responder_id) {
+        return res.status(400).json({
+          success: false,
+          message: "responder_id is required for this status",
+        });
+      }
+
+      if (isNaN(Number(responder_id))) {
+        return res.status(400).json({
+          success: false,
+          message: "responder_id must be a valid number",
+        });
+      }
+    }
+
+    await IncidentStatusModel.createStatus({
+      incident_id: Number(incident_id),
+      responder_id: responder_id ? Number(responder_id) : null,
+      status,
+      timestamp: new Date(),
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Status updated successfully",
+      data: {
+        incident_id: Number(incident_id),
+        responder_id: responder_id ? Number(responder_id) : null,
+        status,
+      },
+    });
+  } catch (error) {
+    console.error("Update Status Error:", error);
     return res.status(500).json({
       success: false,
       message: "Server error",
@@ -174,10 +277,9 @@ const getAllIncidents = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   createIncident,
   assignIncident,
+  updateIncidentStatus,
   getAllIncidents,
 };

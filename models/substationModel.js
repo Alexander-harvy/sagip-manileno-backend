@@ -1,6 +1,26 @@
 const db = require("../config/db");
 
 const SubstationModel = {
+  async createSubstation(data) {
+    const { department_id, substation_name, address, latitude, longitude } = data;
+
+    const sql = `
+      INSERT INTO substation
+      (department_id, substation_name, address, latitude, longitude, is_active)
+      VALUES (?, ?, ?, ?, ?, 1)
+    `;
+
+    const [result] = await db.execute(sql, [
+      department_id,
+      substation_name,
+      address || null,
+      latitude || null,
+      longitude || null,
+    ]);
+
+    return result;
+  },
+
   async getByDepartmentId(department_id) {
     const sql = `
       SELECT
@@ -8,6 +28,8 @@ const SubstationModel = {
         department_id,
         substation_name,
         address,
+        latitude,
+        longitude,
         is_active
       FROM substation
       WHERE department_id = ?
@@ -26,6 +48,8 @@ const SubstationModel = {
         department_id,
         substation_name,
         address,
+        latitude,
+        longitude,
         is_active
       FROM substation
       WHERE substation_id = ?
