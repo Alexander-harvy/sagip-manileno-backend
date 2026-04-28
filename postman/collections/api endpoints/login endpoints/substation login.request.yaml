@@ -1,14 +1,14 @@
 $kind: http-request
-name: Admin Log in
+name: substation login
 url: http://localhost:3000/api/admins/login
 method: POST
 body:
   type: json
   content: "{\r
 
-    \    \"contact_no\": \"09394228613\",\r
+    \  \"username\": \"alex_subs\",\r
 
-    \    \"password\": \"admin123\"\r
+    \  \"password\": \"subs123\"\r
 
     }"
-order: 1775465648610
+order: 1212064220171572

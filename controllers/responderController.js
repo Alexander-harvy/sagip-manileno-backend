@@ -6,7 +6,6 @@ const SubstationModel = require("../models/substationModel");
 const createResponder = async (req, res) => {
   try {
     const {
-      dept_id,
       substation_id,
       employee_no,
       username,
@@ -16,10 +15,12 @@ const createResponder = async (req, res) => {
       password,
     } = req.body;
 
-    if (!dept_id || !substation_id || !employee_no || !first_name || !last_name || !password) {
+    const dept_id = req.user.dept_id;
+
+    if (!substation_id || !employee_no || !first_name || !last_name || !password) {
       return res.status(400).json({
         success: false,
-        message: "dept_id, substation_id, employee_no, first_name, last_name, and password are required",
+        message: "substation_id, employee_no, first_name, last_name, and password are required",
       });
     }
 

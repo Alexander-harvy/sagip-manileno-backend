@@ -1,0 +1,14 @@
+$kind: http-request
+name: admin Log in
+url: http://localhost:3000/api/admins/login
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"alex_eru\",\r
+
+    \    \"password\": \"admin123\"\r
+
+    }"
+order: 1775465648610

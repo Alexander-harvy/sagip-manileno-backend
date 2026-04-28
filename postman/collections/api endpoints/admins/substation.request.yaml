@@ -1,6 +1,6 @@
 $kind: http-request
-name: responders
-url: http://localhost:3000/api/responders
+name: substation
+url: http://localhost:3000/api/admins
 method: POST
 body:
   type: json
@@ -8,21 +8,23 @@ body:
 
     \  \"substation_id\": 1,\r
 
-    \  \"employee_no\": \"POL-R-006\",\r
+    \  \"username\": \"tondo_fire_admin\",\r
 
-    \  \"username\": \"police_responder_006\",\r
+    \  \"email\": \"tondo.fire@sagip.local\",\r
 
-    \  \"first_name\": \"Pedro\",\r
+    \  \"first_name\": \"Tondo\",\r
 
-    \  \"last_name\": \"Santos\",\r
+    \  \"last_name\": \"Fire Admin\",\r
 
-    \  \"contact_no\": \"09173333311\",\r
+    \  \"contact_no\": \"09172222223\",\r
 
-    \  \"password\": \"password123\"\r
+    \  \"password\": \"password123\",\r
+
+    \  \"role\": \"SUBSTATION_ADMIN\"\r
 
     }"
 auth:
   type: bearer
   credentials:
     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6NDAsImRlcHRfaWQiOjMsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoiYWxleF9lcnUiLCJyb2xlIjoiRVJVX0FETUlOIiwiaWF0IjoxNzc3Mjk1OTU4LCJleHAiOjE3NzczODIzNTh9.CiQAQCho_Y1-b6Gg18LFk9aP_hgmJU-ghIiImkIlYoA
-order: 1773746082330
+order: 3555085930372566

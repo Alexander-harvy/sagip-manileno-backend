@@ -6,9 +6,9 @@ body:
   type: json
   content: "{\r
 
-    \  \"substation_name\": \"Binondo fire Substation\",\r
+    \  \"substation_name\": \"\",\r
 
-    \  \"address\": \"Binondo, Manila\",\r
+    \  \"address\": \"\",\r
 
     \  \"latitude\": 14.5995,\r
 
@@ -17,7 +17,6 @@ body:
     }"
 auth:
   credentials:
-    - key: token
-      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoiYWRtaW5fMTMiLCJyb2xlIjoiRVJVX0FETUlOIiwiaWF0IjoxNzc3MTE4OTg0LCJleHAiOjE3NzcyMDUzODR9.OM-sTjSf13HRj6n8jXtowpoz6kZdM_KVuLgYPgSjI9k
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoiYWRtaW5fMTMiLCJyb2xlIjoiRVJVX0FETUlOIiwiaWF0IjoxNzc3MTE4OTg0LCJleHAiOjE3NzcyMDUzODR9.OM-sTjSf13HRj6n8jXtowpoz6kZdM_KVuLgYPgSjI9k
   type: bearer
 order: 878724577494134

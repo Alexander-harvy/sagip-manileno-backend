@@ -1,11 +1,10 @@
 $kind: http-request
+name: user login
 url: http://localhost:3000/api/users/login
 method: POST
 body:
   type: json
   content: "{\r
-
-    \r
 
     \    \"contact_no\": \"09394228611\",\r
 

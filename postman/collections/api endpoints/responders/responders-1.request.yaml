@@ -2,4 +2,8 @@ $kind: http-request
 name: responders
 url: http://localhost:3000/api/responders
 method: GET
+auth:
+  type: bearer
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6NTcsImRlcHRfaWQiOjEsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoiZWVuYV9tYWUiLCJyb2xlIjoiRVJVX0FETUlOIiwiaWF0IjoxNzc3Mjk1NDcxLCJleHAiOjE3NzczODE4NzF9.G78lET6JvMvr5Z_ekguWQ8BdwcICYDNiQg3-BOrl_N0
 order: 3144987186460205

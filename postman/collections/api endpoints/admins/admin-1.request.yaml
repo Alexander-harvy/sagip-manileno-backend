@@ -6,21 +6,27 @@ body:
   type: json
   content: "{\r
 
-    \  \"dept_id\": 3,\r
+    \  \"dept_id\": 1,\r
 
-    \  \"first_name\": \"Shee\",\r
+    \  \"username\": \"eena_mae\",\r
 
-    \  \"last_name\": \"Salvatore\",\r
+    \  \"substation_id\":null,\r
 
-    \  \"contact_no\": \"09823756502\",\r
+    \  \"email\": \"poli.eru@sagip.local\",\r
+
+    \  \"first_name\": \"Sheena\",\r
+
+    \  \"last_name\": \"Camoral\",\r
+
+    \  \"contact_no\": \"09171111119\",\r
 
     \  \"password\": \"admin123\",\r
 
-    \  \"role\" : \"SUBSTATION_ADMIN\"\r
+    \  \"role\": \"ERU_ADMIN\"\r
 
     }"
 auth:
   type: bearer
   credentials:
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsInJvbGUiOiJFUlVfQURNSU4iLCJpYXQiOjE3NzU3MjcxMjcsImV4cCI6MTc3NTgxMzUyN30.SwPy7Z4gxIfa3tMCS10FfLDgVSoSlOIW7H6dN5Owtzs
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoiYWRtaW5fMTMiLCJyb2xlIjoiRVJVX0FETUlOIiwiaWF0IjoxNzc3Mjk1MzQ3LCJleHAiOjE3NzczODE3NDd9.uSZz42CCdOYNWn9rBa4gvLB9WkuGPPStVjUlPWtd5DU
 order: 2457448531165115

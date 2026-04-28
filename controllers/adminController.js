@@ -146,17 +146,18 @@ const loginAdmin = async (req, res) => {
 
 const createAdmin = async (req, res) => {
   try {
-    const {
-      dept_id,
-      substation_id,
-      username,
-      email,
-      first_name,
-      last_name,
-      contact_no,
-      password,
-      role,
-    } = req.body;
+  const {
+    substation_id,
+    username,
+    email,
+    first_name,
+    last_name,
+    contact_no,
+    password,
+    role,
+  } = req.body;
+
+  const dept_id = req.user.dept_id;
 
     if (!dept_id || !username || !first_name || !last_name || !password || !role) {
       return res.status(400).json({
