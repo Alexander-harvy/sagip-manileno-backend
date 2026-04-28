@@ -6,19 +6,19 @@ body:
   type: json
   content: "{\r
 
-    \  \"substation_id\": 1,\r
+    \  \"substation_id\": 7,\r
 
-    \  \"username\": \"tondo_fire_admin\",\r
+    \  \"username\": \"MNLnorth.subs@med\",\r
 
-    \  \"email\": \"tondo.fire@sagip.local\",\r
+    \  \"email\": \"northsubs.med@sagip.local\",\r
 
-    \  \"first_name\": \"Tondo\",\r
+    \  \"first_name\": \"North\",\r
 
-    \  \"last_name\": \"Fire Admin\",\r
+    \  \"last_name\": \"Substation\",\r
 
-    \  \"contact_no\": \"09172222223\",\r
+    \  \"contact_no\": \"09172222230\",\r
 
-    \  \"password\": \"password123\",\r
+    \  \"password\": \"subs123\",\r
 
     \  \"role\": \"SUBSTATION_ADMIN\"\r
 
@@ -26,5 +26,5 @@ body:
 auth:
   type: bearer
   credentials:
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6NDAsImRlcHRfaWQiOjMsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoiYWxleF9lcnUiLCJyb2xlIjoiRVJVX0FETUlOIiwiaWF0IjoxNzc3Mjk1OTU4LCJleHAiOjE3NzczODIzNTh9.CiQAQCho_Y1-b6Gg18LFk9aP_hgmJU-ghIiImkIlYoA
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6NDAsImRlcHRfaWQiOjMsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoiYWxleF9lcnUiLCJyb2xlIjoiRVJVX0FETUlOIiwiaWF0IjoxNzc3MzY5NjcyLCJleHAiOjE3Nzc0NTYwNzJ9.W_Q5fWC93jTWkKdgOwGv_hqIH3i5QlOTdn5KA0I7V1g
 order: 3555085930372566

@@ -33,29 +33,38 @@ const ResponderModel = {
     return result;
   },
 
-  async getAllResponders() {
-    const sql = `
-      SELECT 
-        r.responder_id,
-        r.dept_id,
-        d.dept_name,
-        d.dept_type,
-        r.substation_id,
-        s.substation_name,
-        r.employee_no,
-        r.username,
-        r.first_name,
-        r.last_name,
-        r.contact_no
-      FROM responder r
-      JOIN department d ON r.dept_id = d.dept_id
-      JOIN substation s ON r.substation_id = s.substation_id
-      ORDER BY r.responder_id DESC
-    `;
+  async getAllResponders({ role, dept_id, substation_id }) {
+  let sql = `
+    SELECT 
+      r.responder_id,
+      r.dept_id,
+      d.dept_name,
+      d.dept_type,
+      r.substation_id,
+      s.substation_name,
+      r.employee_no,
+      r.username,
+      r.first_name,
+      r.last_name,
+      r.contact_no
+    FROM responder r
+    JOIN department d ON r.dept_id = d.dept_id
+    JOIN substation s ON r.substation_id = s.substation_id
+    WHERE r.dept_id = ?
+  `;
 
-    const [rows] = await db.execute(sql);
-    return rows;
-  },
+  const params = [dept_id];
+
+  if (role === "SUBSTATION_ADMIN") {
+    sql += ` AND r.substation_id = ?`;
+    params.push(substation_id);
+  }
+
+  sql += ` ORDER BY r.responder_id DESC`;
+
+  const [rows] = await db.execute(sql, params);
+  return rows;
+},
 
   async getResponderById(responder_id) {
     const sql = `

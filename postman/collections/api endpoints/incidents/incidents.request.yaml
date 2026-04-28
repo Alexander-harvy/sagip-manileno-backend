@@ -8,7 +8,7 @@ body:
 
     \  \"user_id\": 1,\r
 
-    \  \"incident_type\": \"Police\",\r
+    \  \"incident_type\": \"Fire\",\r
 
     \  \"latitude\": 14.5995,\r
 
@@ -16,7 +16,7 @@ body:
 
     \  \"location_name\": \"Tondo, Manila\",\r
 
-    \  \"description\": \"Suspicious activity reported\",\r
+    \  \"description\": \"Fire activity reported\",\r
 
     \  \"source\": \"api\"\r
 
@@ -24,5 +24,5 @@ body:
 auth:
   type: bearer
   credentials:
-    token: ""
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsInJvbGUiOiJ1c2VyIiwiY29udGFjdF9ubyI6IjA5Mzk0MjI4NjExIiwiaWF0IjoxNzc3MzYwMjU5LCJleHAiOjE3Nzc0NDY2NTl9.9lhvYL0iDdSiXuSRB6VLAkYXfNbIN_wruHYj9wJtirQ
 order: 1773745464653

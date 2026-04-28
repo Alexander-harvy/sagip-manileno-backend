@@ -78,7 +78,11 @@ const createResponder = async (req, res) => {
 
 const getAllResponders = async (req, res) => {
   try {
-    const responders = await ResponderModel.getAllResponders();
+    const responders = await ResponderModel.getAllResponders({
+    role: req.user.role,
+    dept_id: req.user.dept_id,
+    substation_id: req.user.substation_id,
+    });
 
     return res.status(200).json({
       success: true,

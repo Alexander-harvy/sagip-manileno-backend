@@ -2,6 +2,18 @@ const IncidentModel = require("../models/incidentModel");
 const IncidentAssignmentModel = require("../models/incidentAssignmentModel");
 const IncidentStatusModel = require("../models/incidentStatusModel");
 const SubstationModel = require("../models/substationModel");
+const DepartmentModel = require("../models/departmentModel");
+
+const isIncidentAllowedForDepartment = (incidentType, deptType) => {
+  const incident = String(incidentType).toLowerCase();
+  const dept = String(deptType).toLowerCase();
+
+  if (dept === "medical") {
+    return incident === "medical" || incident === "medic";
+  }
+
+  return incident === dept;
+};
 
 // CREATE INCIDENT (from mobile/user)
 const createIncident = async (req, res) => {
@@ -167,6 +179,22 @@ const assignIncident = async (req, res) => {
       message: "Server error",
     });
   }
+
+  const department = await DepartmentModel.getDepartmentById(department_id);
+
+if (!department) {
+  return res.status(404).json({
+    success: false,
+    message: "Department not found",
+  });
+}
+
+if (!isIncidentAllowedForDepartment(incident.incident_type, department.dept_type)) {
+  return res.status(403).json({
+    success: false,
+    message: "You are not allowed to assign this incident type",
+    });
+  }
 };
 
 const updateIncidentStatus = async (req, res) => {
@@ -262,7 +290,11 @@ const updateIncidentStatus = async (req, res) => {
 // GET ALL INCIDENTS
 const getAllIncidents = async (req, res) => {
   try {
-    const incidents = await IncidentModel.getAllIncidents();
+    const incidents = await IncidentModel.getAllIncidents({
+  dept_id: req.user.dept_id,
+  substation_id: req.user.substation_id,
+  role: req.user.role,
+  });
 
     return res.status(200).json({
       success: true,

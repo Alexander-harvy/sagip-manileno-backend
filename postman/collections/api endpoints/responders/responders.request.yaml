@@ -6,17 +6,17 @@ body:
   type: json
   content: "{\r
 
-    \  \"substation_id\": 1,\r
+    \  \"substation_id\": 4,\r
 
-    \  \"employee_no\": \"POL-R-006\",\r
+    \  \"employee_no\": \"BFP-R-001\",\r
 
-    \  \"username\": \"police_responder_006\",\r
+    \  \"username\": \"BFP_responder_00\",\r
 
-    \  \"first_name\": \"Pedro\",\r
+    \  \"first_name\": \"Alex\",\r
 
-    \  \"last_name\": \"Santos\",\r
+    \  \"last_name\": \"San Pedro\",\r
 
-    \  \"contact_no\": \"09173333311\",\r
+    \  \"contact_no\": \"09173333314\",\r
 
     \  \"password\": \"password123\"\r
 
@@ -24,5 +24,5 @@ body:
 auth:
   type: bearer
   credentials:
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6NDAsImRlcHRfaWQiOjMsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoiYWxleF9lcnUiLCJyb2xlIjoiRVJVX0FETUlOIiwiaWF0IjoxNzc3Mjk1OTU4LCJleHAiOjE3NzczODIzNTh9.CiQAQCho_Y1-b6Gg18LFk9aP_hgmJU-ghIiImkIlYoA
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MzksImRlcHRfaWQiOjIsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoic2hlYW5fZXJ1Iiwicm9sZSI6IkVSVV9BRE1JTiIsImlhdCI6MTc3NzM2MDQ3MCwiZXhwIjoxNzc3NDQ2ODcwfQ.D6NQOFqPazy3LTx4bJq-NzDLxmCbk3Ip3S2aKvrY7kk
 order: 1773746082330
