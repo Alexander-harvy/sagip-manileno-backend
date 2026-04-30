@@ -14,6 +14,21 @@ router.post("/", verifyToken, allowRoles("ERU_ADMIN"), responderController.creat
 // ADMIN + RESPONDER
 router.get("/", verifyToken, allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"), responderController.getAllResponders);
 
+router.get(
+  "/me/incidents", 
+  verifyToken, 
+  allowRoles("responder"), 
+  responderController.
+  getMyAssignedIncidents
+);
+
+router.post(
+  "/me/status",
+  verifyToken,
+  allowRoles("responder"),
+  responderController.updateMyIncidentStatus
+);
+
 // ALL AUTHENTICATED
 router.get("/:id", verifyToken, allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"), responderController.getResponderById);
 

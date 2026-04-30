@@ -6,17 +6,17 @@ body:
   type: json
   content: "{\r
 
-    \  \"substation_id\": 7,\r
+    \  \"substation_id\": 6,\r
 
-    \  \"username\": \"MNLnorth.subs@med\",\r
+    \  \"username\": \"paco.subs@bfp\",\r
 
-    \  \"email\": \"northsubs.med@sagip.local\",\r
+    \  \"email\": \"pacosubs.bfp@sagip.local\",\r
 
-    \  \"first_name\": \"North\",\r
+    \  \"first_name\": \"Paco\",\r
 
     \  \"last_name\": \"Substation\",\r
 
-    \  \"contact_no\": \"09172222230\",\r
+    \  \"contact_no\": \"09172222222\",\r
 
     \  \"password\": \"subs123\",\r
 
@@ -26,5 +26,5 @@ body:
 auth:
   type: bearer
   credentials:
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6NDAsImRlcHRfaWQiOjMsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoiYWxleF9lcnUiLCJyb2xlIjoiRVJVX0FETUlOIiwiaWF0IjoxNzc3MzY5NjcyLCJleHAiOjE3Nzc0NTYwNzJ9.W_Q5fWC93jTWkKdgOwGv_hqIH3i5QlOTdn5KA0I7V1g
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MzksImRlcHRfaWQiOjIsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoic2hlYW5fZXJ1Iiwicm9sZSI6IkVSVV9BRE1JTiIsImlhdCI6MTc3NzM3MDgzMSwiZXhwIjoxNzc3NDU3MjMxfQ.9wpcE-hs2oYKhuRaI7Jv7JpOVtFHvJMjj__B81vzK4A
 order: 3555085930372566

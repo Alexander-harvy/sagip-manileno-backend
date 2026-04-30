@@ -27,6 +27,8 @@ const IncidentAssignmentModel = {
     return result;
   },
 
+  
+
   async getAssignmentsByIncidentId(incident_id) {
     const sql = `
       SELECT
@@ -68,6 +70,37 @@ const IncidentAssignmentModel = {
 
   const [rows] = await db.execute(sql);
   return rows;
+},
+
+async updateResponderAssignment({ incident_id, responder_id }) {
+  const sql = `
+    UPDATE incident_assignment
+    SET responder_id = ?
+    WHERE incident_id = ?
+    ORDER BY assign_id DESC
+    LIMIT 1
+  `;
+
+  const [result] = await db.execute(sql, [
+    responder_id,
+    incident_id,
+  ]);
+
+  return result;
+},
+
+async getAssignmentByIncidentAndResponder({ incident_id, responder_id }) {
+  const sql = `
+    SELECT *
+    FROM incident_assignment
+    WHERE incident_id = ?
+      AND responder_id = ?
+    ORDER BY assign_id DESC
+    LIMIT 1
+  `;
+
+  const [rows] = await db.execute(sql, [incident_id, responder_id]);
+  return rows[0];
 }
 
 };

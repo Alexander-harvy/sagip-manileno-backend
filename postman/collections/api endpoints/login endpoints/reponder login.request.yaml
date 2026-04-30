@@ -6,9 +6,9 @@ body:
   type: json
   content: "{\r
 
-    \  \"employee_no\": \"POL-R-001\",\r
+    \  \"employee_no\": \"BFP-R-001\",\r
 
-    \  \"password\": \"password123\"\r
+    \  \"password\": \"responder123\"\r
 
     }"
 auth:

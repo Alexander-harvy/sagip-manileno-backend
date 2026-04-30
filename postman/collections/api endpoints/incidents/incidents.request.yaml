@@ -6,8 +6,6 @@ body:
   type: json
   content: "{\r
 
-    \  \"user_id\": 1,\r
-
     \  \"incident_type\": \"Fire\",\r
 
     \  \"latitude\": 14.5995,\r
@@ -16,7 +14,7 @@ body:
 
     \  \"location_name\": \"Tondo, Manila\",\r
 
-    \  \"description\": \"Fire activity reported\",\r
+    \  \"description\": \"Fire reported near residential area\",\r
 
     \  \"source\": \"api\"\r
 
@@ -24,5 +22,5 @@ body:
 auth:
   type: bearer
   credentials:
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsInJvbGUiOiJ1c2VyIiwiY29udGFjdF9ubyI6IjA5Mzk0MjI4NjExIiwiaWF0IjoxNzc3MzYwMjU5LCJleHAiOjE3Nzc0NDY2NTl9.9lhvYL0iDdSiXuSRB6VLAkYXfNbIN_wruHYj9wJtirQ
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsInJvbGUiOiJ1c2VyIiwiY29udGFjdF9ubyI6IjA5Mzk0MjI4NjExIiwiaWF0IjoxNzc3NTU0MjMxLCJleHAiOjE3Nzc2NDA2MzF9.Mq9TXUDuj5tvA_WsqD8YsGK4zkjkAFr9Z4cqocqlHbI
 order: 1773745464653

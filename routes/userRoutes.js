@@ -12,6 +12,13 @@ router.post('/login', userController.loginUser);
 // ADMIN ONLY
 router.get('/', verifyToken, allowRoles("ERU_ADMIN"), userController.getAllUsers);
 
+router.get(
+  "/me/incidents",
+  verifyToken,
+  allowRoles("user"),
+  userController.getMyIncidents
+);
+
 // AUTHENTICATED USER
 router.get('/:id', verifyToken, allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"), userController.getUserById);
 

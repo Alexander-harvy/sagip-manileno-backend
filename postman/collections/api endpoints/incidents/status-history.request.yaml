@@ -1,0 +1,9 @@
+$kind: http-request
+name: status-history
+url: http://localhost:3000/api/incidents/43/status-history
+method: GET
+auth:
+  credentials:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsInJvbGUiOiJ1c2VyIiwiY29udGFjdF9ubyI6IjA5Mzk0MjI4NjExIiwiaWF0IjoxNzc3NTU2MTA2LCJleHAiOjE3Nzc2NDI1MDZ9.bdP0Axyj08lKHHtl7nBHHllr_M4zWoReO1Pr4Dl47zI
+  type: bearer
+order: 4501978741078860

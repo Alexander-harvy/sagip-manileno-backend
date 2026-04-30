@@ -101,6 +101,54 @@ const ResponderModel = {
     const [rows] = await db.execute(sql, [employee_no]);
     return rows[0];
   },
+
+  async getAssignedIncidents(responder_id) {
+  const sql = `
+    SELECT 
+      i.incident_id,
+      i.user_id,
+      u.first_name AS user_first_name,
+      u.last_name AS user_last_name,
+      i.incident_type,
+      i.latitude,
+      i.longitude,
+      i.location_name,
+      i.description,
+      i.reported_at,
+      i.source,
+
+      ia.assign_id,
+      ia.substation_id,
+      s.substation_name,
+      ia.assigned_at,
+
+      st.status,
+      st.timestamp AS status_timestamp
+
+    FROM incident_assignment ia
+    JOIN incident i ON ia.incident_id = i.incident_id
+    JOIN users u ON i.user_id = u.user_id
+    JOIN substation s ON ia.substation_id = s.substation_id
+
+    LEFT JOIN (
+      SELECT st1.*
+      FROM incident_status st1
+      INNER JOIN (
+        SELECT incident_id, MAX(status_log_id) AS latest_status_id
+        FROM incident_status
+        GROUP BY incident_id
+      ) latest
+      ON st1.status_log_id = latest.latest_status_id
+    ) st ON st.incident_id = i.incident_id
+
+    WHERE ia.responder_id = ?
+    ORDER BY ia.assigned_at DESC
+  `;
+
+  const [rows] = await db.execute(sql, [responder_id]);
+  return rows;
+  },
+
 };
 
 module.exports = ResponderModel;

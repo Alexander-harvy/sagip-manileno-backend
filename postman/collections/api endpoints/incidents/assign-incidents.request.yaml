@@ -6,13 +6,13 @@ body:
   type: json
   content: "{ \r
 
-    \  \"incident_id\":21,\r
+    \  \"incident_id\":43 ,\r
 
-    \  \"substation_id\": 3\r
+    \  \"substation_id\": 5\r
 
     }"
 auth:
   type: bearer
   credentials:
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MTMsImRlcHRfaWQiOjEsImNvbnRhY3Rfbm8iOiIwOTM5NDIyODYxMyIsInJvbGUiOiJFUlVfQURNSU4iLCJpYXQiOjE3NzY4NTQ2NjIsImV4cCI6MTc3Njk0MTA2Mn0.5uwnOZnQGf4hV5_bk10RRokwiA27gINFqD3ZjaPzWqY
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6MzksImRlcHRfaWQiOjIsInN1YnN0YXRpb25faWQiOm51bGwsInVzZXJuYW1lIjoic2hlYW5fZXJ1Iiwicm9sZSI6IkVSVV9BRE1JTiIsImlhdCI6MTc3NzU1NDg1NywiZXhwIjoxNzc3NjQxMjU3fQ.Tg2nRzALZK4OVpYW93ym_pHxceUvKsAPEQiQPvmicH0
 order: 4414090142064316

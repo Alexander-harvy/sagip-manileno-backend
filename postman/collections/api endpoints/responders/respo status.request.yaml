@@ -1,0 +1,19 @@
+$kind: http-request
+name: respo status
+url: http://localhost:3000/api/responders/me/status
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"incident_id\": 39,\r
+
+    \  \"status\": \"en_route\"\r
+
+    }"
+auth:
+  credentials:
+    - key: token
+      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsInJvbGUiOiJyZXNwb25kZXIiLCJkZXB0X2lkIjoyLCJzdWJzdGF0aW9uX2lkIjo0LCJlbXBsb3llZV9ubyI6IkJGUC1SLTAwMSIsImlhdCI6MTc3NzQ1NjMxOSwiZXhwIjoxNzc3NTQyNzE5fQ.AesK1V1PNWEbfD_flYYzkA1m13Xwyhb_DppUaTEjzfk
+  type: bearer
+order: 4404879394664663

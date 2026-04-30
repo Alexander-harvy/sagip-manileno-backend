@@ -1,9 +1,18 @@
 $kind: http-request
-name: responders
-url: http://localhost:3000/api/responders
-method: GET
+name: assign-responder
+url: http://localhost:3000/api/incidents/assign-responder
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"incident_id\": 43,\r
+
+    \  \"responder_id\": 44\r
+
+    }"
 auth:
   type: bearer
   credentials:
     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbl9pZCI6NjksImRlcHRfaWQiOjIsInN1YnN0YXRpb25faWQiOjUsInVzZXJuYW1lIjoic3RhY3J1ei5zdWJzQGJmcCIsInJvbGUiOiJTVUJTVEFUSU9OX0FETUlOIiwiaWF0IjoxNzc3NTU1ODczLCJleHAiOjE3Nzc2NDIyNzN9.afv1MFAYp4IbY-dZljndiyjKyWADvKHeegbqATrbZZA
-order: 3144987186460205
+order: 4497530398774522

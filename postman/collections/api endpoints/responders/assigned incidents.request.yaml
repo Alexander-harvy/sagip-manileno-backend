@@ -1,0 +1,10 @@
+$kind: http-request
+name: assigned incidents
+url: http://localhost:3000/api/responders/me/incidents
+method: GET
+auth:
+  credentials:
+    - key: token
+      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDAsInJvbGUiOiJyZXNwb25kZXIiLCJkZXB0X2lkIjoxLCJzdWJzdGF0aW9uX2lkIjoxLCJlbXBsb3llZV9ubyI6IlBOUC1SLTAwMSIsImlhdCI6MTc3NzQ1MDQ3OCwiZXhwIjoxNzc3NTM2ODc4fQ.vNlaA9VmMnSl15dSbi6a-o6dcK55n3JjY-WvmzFsO-c
+  type: bearer
+order: 4374957632995061

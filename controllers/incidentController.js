@@ -3,6 +3,7 @@ const IncidentAssignmentModel = require("../models/incidentAssignmentModel");
 const IncidentStatusModel = require("../models/incidentStatusModel");
 const SubstationModel = require("../models/substationModel");
 const DepartmentModel = require("../models/departmentModel");
+const ResponderModel = require("../models/responderModel");
 
 const isIncidentAllowedForDepartment = (incidentType, deptType) => {
   const incident = String(incidentType).toLowerCase();
@@ -19,7 +20,6 @@ const isIncidentAllowedForDepartment = (incidentType, deptType) => {
 const createIncident = async (req, res) => {
   try {
     const {
-      user_id,
       incident_type,
       latitude,
       longitude,
@@ -29,12 +29,14 @@ const createIncident = async (req, res) => {
       source,
     } = req.body;
 
-    if (!user_id || !incident_type || !description) {
-      return res.status(400).json({
-        success: false,
-        message: "user_id, incident_type, and description are required",
-      });
-    }
+    const user_id = req.user.id;
+
+  if (!incident_type || !description) {
+    return res.status(400).json({
+      success: false,
+      message: "incident_type and description are required",
+    });
+  }
 
     const finalReportedAt = reported_at || new Date();
     const finalSource = source || "api";
@@ -309,9 +311,158 @@ const getAllIncidents = async (req, res) => {
   }
 };
 
+const assignResponder = async (req, res) => {
+  try {
+    const { incident_id, responder_id } = req.body;
+
+    const admin_substation_id = req.user.substation_id;
+
+    if (!incident_id || !responder_id) {
+      return res.status(400).json({
+        success: false,
+        message: "incident_id and responder_id are required",
+      });
+    }
+
+    // 1. Check incident
+    const incident = await IncidentModel.getIncidentById(incident_id);
+
+    if (!incident) {
+      return res.status(404).json({
+        success: false,
+        message: "Incident not found",
+      });
+    }
+
+    // 2. Get latest assignment
+    const assignments = await IncidentAssignmentModel.getAssignmentsByIncidentId(incident_id);
+
+    if (!assignments.length) {
+      return res.status(400).json({
+        success: false,
+        message: "Incident is not assigned to any substation",
+      });
+    }
+
+    const latestAssignment = assignments[0];
+
+    // 3. Validate substation ownership
+    if (Number(latestAssignment.substation_id) !== Number(admin_substation_id)) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not allowed to assign responder to this incident",
+      });
+    }
+
+    // 4. Prevent duplicate responder assignment
+    if (latestAssignment.responder_id) {
+      return res.status(400).json({
+        success: false,
+        message: "Responder already assigned",
+      });
+    }
+
+    // 5. Get responder
+    const responder = await ResponderModel.getResponderById(responder_id);
+
+    if (!responder) {
+      return res.status(404).json({
+        success: false,
+        message: "Responder not found",
+      });
+    }
+
+    // 6. Validate responder substation
+    if (Number(responder.substation_id) !== Number(admin_substation_id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Responder does not belong to your substation",
+      });
+    }
+
+    // 7. Update assignment
+    await IncidentAssignmentModel.updateResponderAssignment({
+      incident_id,
+      responder_id,
+    });
+
+    // 8. Insert status
+    await IncidentStatusModel.createStatus({
+      incident_id,
+      responder_id,
+      status: "responder_assigned",
+      timestamp: new Date(),
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Responder assigned successfully",
+      data: {
+        incident_id,
+        responder_id,
+        status: "responder_assigned",
+      },
+    });
+
+  } catch (error) {
+    console.error("assignResponder error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to assign responder",
+      error: error.message,
+    });
+  }
+};
+
+const getIncidentStatusHistory = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (isNaN(Number(id))) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid incident ID",
+      });
+    }
+
+    const incident = await IncidentModel.getIncidentById(id);
+
+    if (!incident) {
+      return res.status(404).json({
+        success: false,
+        message: "Incident not found",
+      });
+    }
+
+    if (req.user.role === "user" && Number(incident.user_id) !== Number(req.user.id)) {
+      return res.status(403).json({
+        success: false,
+        message: "Forbidden: you cannot view this incident",
+      });
+    }
+
+    const statuses = await IncidentStatusModel.getStatusesByIncidentId(id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Incident status history retrieved successfully",
+      data: statuses,
+    });
+  } catch (error) {
+    console.error("getIncidentStatusHistory error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to retrieve incident status history",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createIncident,
   assignIncident,
+  assignResponder,
   updateIncidentStatus,
   getAllIncidents,
+  getIncidentStatusHistory,
 };

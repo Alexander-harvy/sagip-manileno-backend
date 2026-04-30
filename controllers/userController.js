@@ -143,9 +143,44 @@ const loginUser = async (req, res) => {
   }
 };
 
+const getMyIncidents = async (req, res) => {
+  try {
+    const user_id = req.user.id;
+
+    if (!user_id) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid user token",
+      });
+    }
+
+    const incidents = await UserModel.getIncidentsByUserId(user_id);
+
+    const mapped = incidents.map((incident) => ({
+      ...incident,
+      is_assigned: incident.assign_id !== null,
+      has_responder: incident.responder_id !== null,
+    }));
+
+    return res.status(200).json({
+      success: true,
+      message: "User incidents retrieved successfully",
+      data: mapped,
+    });
+  } catch (error) {
+    console.error("getMyIncidents error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to retrieve user incidents",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createUser,
   getAllUsers,
   getUserById,
   loginUser,
+  getMyIncidents,
 };

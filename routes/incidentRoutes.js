@@ -28,6 +28,20 @@ router.post(
   verifyToken,
   allowRoles("SUBSTATION_ADMIN", "responder"),
   incidentController.updateIncidentStatus
-)
+);
+
+router.post(
+  "/assign-responder",
+  verifyToken,
+  allowRoles("SUBSTATION_ADMIN"),
+  incidentController.assignResponder
+);
+
+router.get(
+  "/:id/status-history",
+  verifyToken,
+  allowRoles("user", "ERU_ADMIN", "SUBSTATION_ADMIN", "responder"),
+  incidentController.getIncidentStatusHistory
+);
 
 module.exports = router;

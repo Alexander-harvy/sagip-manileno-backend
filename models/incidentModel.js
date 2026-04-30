@@ -116,7 +116,7 @@ return rows;
 
   async getIncidentById(incident_id) {
     const sql = `
-      SELECT incident_id, incident_type, description, location_name
+      SELECT incident_id, user_id, incident_type, description, location_name
       FROM incident
       WHERE incident_id = ?
       LIMIT 1

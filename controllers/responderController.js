@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const ResponderModel = require("../models/responderModel");
 const SubstationModel = require("../models/substationModel");
+const IncidentAssignmentModel = require("../models/incidentAssignmentModel");
+const IncidentStatusModel = require("../models/incidentStatusModel");
 
 const createResponder = async (req, res) => {
   try {
@@ -189,9 +191,118 @@ const loginResponder = async (req, res) => {
   }
 };
 
+const getMyAssignedIncidents = async (req, res) => {
+  try {
+    const responder_id = req.user.id;
+
+    if (!responder_id) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid responder token",
+      });
+    }
+
+    const incidents = await ResponderModel.getAssignedIncidents(responder_id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Assigned incidents retrieved successfully",
+      data: incidents,
+    });
+  } catch (error) {
+    console.error("getMyAssignedIncidents error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to retrieve assigned incidents",
+      error: error.message,
+    });
+  }
+};
+
+const updateMyIncidentStatus = async (req, res) => {
+  try {
+    const responder_id = req.user.id;
+    const { incident_id, status } = req.body;
+
+    if (!incident_id || !status) {
+      return res.status(400).json({
+        success: false,
+        message: "incident_id and status are required",
+      });
+    }
+
+    const allowedStatuses = ["en_route", "on_scene", "resolved"];
+
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid status value",
+      });
+    }
+
+    const assignment =
+      await IncidentAssignmentModel.getAssignmentByIncidentAndResponder({
+        incident_id,
+        responder_id,
+      });
+
+    if (!assignment) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not assigned to this incident",
+      });
+    }
+
+    const latestStatus =
+      await IncidentStatusModel.getLatestStatusByIncidentId(incident_id);
+
+    const validTransitions = {
+      responder_assigned: ["en_route"],
+      en_route: ["on_scene"],
+      on_scene: ["resolved"],
+      resolved: [],
+    };
+
+    const currentStatus = latestStatus?.status;
+
+    if (!currentStatus || !validTransitions[currentStatus]?.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: `Invalid status transition from ${currentStatus || "unknown"} to ${status}`,
+      });
+    }
+
+    await IncidentStatusModel.createStatus({
+      incident_id,
+      responder_id,
+      status,
+      timestamp: new Date(),
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Incident status updated successfully",
+      data: {
+        incident_id,
+        responder_id,
+        status,
+      },
+    });
+  } catch (error) {
+    console.error("updateMyIncidentStatus error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to update incident status",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createResponder,
   getAllResponders,
   getResponderById,
   loginResponder,
+  getMyAssignedIncidents,
+  updateMyIncidentStatus,
 };
