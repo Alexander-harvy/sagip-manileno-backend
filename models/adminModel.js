@@ -100,6 +100,49 @@ const AdminModel = {
     const [rows] = await db.execute(sql, [admin_id]);
     return rows[0];
   },
+
+  async getAdminWithPassword(admin_id) {
+    const sql = `
+      SELECT *
+      FROM emergency_unit_admin
+      WHERE admin_id = ?
+      LIMIT 1
+    `;
+
+    const [rows] = await db.execute(sql, [admin_id]);
+    return rows[0];
+  },
+
+  async updateAdminProfile(admin_id, data) {
+    const { first_name, last_name, email, contact_no } = data;
+
+    const sql = `
+      UPDATE emergency_unit_admin
+      SET first_name = ?, last_name = ?, email = ?, contact_no = ?
+      WHERE admin_id = ?
+    `;
+
+    await db.execute(sql, [
+      first_name,
+      last_name,
+      email || null,
+      contact_no || null,
+      admin_id,
+    ]);
+
+    return this.getAdminById(admin_id);
+  },
+
+  async updatePassword(admin_id, hashedPassword) {
+    const sql = `
+      UPDATE emergency_unit_admin
+      SET password = ?
+      WHERE admin_id = ?
+    `;
+
+    const [result] = await db.execute(sql, [hashedPassword, admin_id]);
+    return result;
+  },
 };
 
 module.exports = AdminModel;

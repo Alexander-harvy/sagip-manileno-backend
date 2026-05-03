@@ -20,7 +20,8 @@ const bootstrapAdmin = async (req, res) => {
     if (!dept_id || !username || !first_name || !last_name || !password || !role) {
       return res.status(400).json({
         success: false,
-        message: "dept_id, username, first_name, last_name, password, and role are required",
+        message:
+          "dept_id, username, first_name, last_name, password, and role are required",
       });
     }
 
@@ -146,23 +147,24 @@ const loginAdmin = async (req, res) => {
 
 const createAdmin = async (req, res) => {
   try {
-  const {
-    substation_id,
-    username,
-    email,
-    first_name,
-    last_name,
-    contact_no,
-    password,
-    role,
-  } = req.body;
+    const {
+      substation_id,
+      username,
+      email,
+      first_name,
+      last_name,
+      contact_no,
+      password,
+      role,
+    } = req.body;
 
-  const dept_id = req.user.dept_id;
+    const dept_id = req.user.dept_id;
 
     if (!dept_id || !username || !first_name || !last_name || !password || !role) {
       return res.status(400).json({
         success: false,
-        message: "dept_id, username, first_name, last_name, password, and role are required",
+        message:
+          "dept_id, username, first_name, last_name, password, and role are required",
       });
     }
 
@@ -277,10 +279,99 @@ const getAdminById = async (req, res) => {
   }
 };
 
+const updateMyProfile = async (req, res) => {
+  try {
+    const admin_id = req.user.admin_id;
+    const { first_name, last_name, email, contact_no } = req.body;
+
+    if (!first_name || !last_name) {
+      return res.status(400).json({
+        success: false,
+        message: "first_name and last_name are required",
+      });
+    }
+
+    const updatedAdmin = await AdminModel.updateAdminProfile(admin_id, {
+      first_name,
+      last_name,
+      email,
+      contact_no,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      data: updatedAdmin,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to update profile",
+      error: error.message,
+    });
+  }
+};
+
+const changeMyPassword = async (req, res) => {
+  try {
+    const admin_id = req.user.admin_id;
+    const { oldPassword, newPassword } = req.body;
+
+    if (!oldPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "oldPassword and newPassword are required",
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: "New password must be at least 6 characters",
+      });
+    }
+
+    const admin = await AdminModel.getAdminWithPassword(admin_id);
+
+    if (!admin) {
+      return res.status(404).json({
+        success: false,
+        message: "Admin not found",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(oldPassword, admin.password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Current password is incorrect",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await AdminModel.updatePassword(admin_id, hashedPassword);
+
+    return res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to change password",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   bootstrapAdmin,
   loginAdmin,
   createAdmin,
   getAllAdmins,
   getAdminById,
+  updateMyProfile,
+  changeMyPassword,
 };

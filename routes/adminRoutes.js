@@ -9,6 +9,20 @@ const allowRoles = require("../middleware/roleMiddleware");
 router.post("/bootstrap", adminController.bootstrapAdmin);
 router.post("/login", adminController.loginAdmin);
 
+router.put(
+  "/me",
+  verifyToken,
+  allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"),
+  adminController.updateMyProfile
+);
+
+router.put(
+  "/change-password",
+  verifyToken,
+  allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"),
+  adminController.changeMyPassword
+);
+
 router.post(
   "/",
   verifyToken,
