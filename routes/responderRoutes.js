@@ -29,7 +29,13 @@ router.post(
   responderController.updateMyIncidentStatus
 );
 
-// ALL AUTHENTICATED
+router.get(
+  "/:id/members",
+  verifyToken,
+  allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"),
+  responderController.getMembersByTeamLeader
+);
+
 router.get("/:id", verifyToken, allowRoles("ERU_ADMIN", "SUBSTATION_ADMIN"), responderController.getResponderById);
 
 module.exports = router;

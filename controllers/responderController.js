@@ -219,6 +219,27 @@ const getMyAssignedIncidents = async (req, res) => {
   }
 };
 
+const getMembersByTeamLeader = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const members = await ResponderModel.getMembersByTeamLeader(id);
+
+    return res.status(200).json({
+      success: true,
+      data: members,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch team members",
+      error: error.message,
+    });
+  }
+};
+
+
+
 const updateMyIncidentStatus = async (req, res) => {
   try {
     const responder_id = req.user.id;
@@ -305,4 +326,6 @@ module.exports = {
   loginResponder,
   getMyAssignedIncidents,
   updateMyIncidentStatus,
+  getMembersByTeamLeader,
+
 };

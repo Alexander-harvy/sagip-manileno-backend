@@ -42,15 +42,19 @@ const ResponderModel = {
       d.dept_type,
       r.substation_id,
       s.substation_name,
+      s.address,
       r.employee_no,
       r.username,
       r.first_name,
       r.last_name,
-      r.contact_no
+      r.contact_no,
+      r.team_leader_id,  
+      r.is_team_leader  
     FROM responder r
     JOIN department d ON r.dept_id = d.dept_id
     JOIN substation s ON r.substation_id = s.substation_id
     WHERE r.dept_id = ?
+    AND r.is_team_leader = 1
   `;
 
   const params = [dept_id];
@@ -79,7 +83,9 @@ const ResponderModel = {
         r.username,
         r.first_name,
         r.last_name,
-        r.contact_no
+        r.contact_no,
+        r.team_leader_id,   
+        r.is_team_leader  
       FROM responder r
       JOIN department d ON r.dept_id = d.dept_id
       JOIN substation s ON r.substation_id = s.substation_id
@@ -100,6 +106,22 @@ const ResponderModel = {
 
     const [rows] = await db.execute(sql, [employee_no]);
     return rows[0];
+  },
+
+   async getMembersByTeamLeader(team_leader_id) {
+    const sql = `
+      SELECT 
+        responder_id,
+        employee_no,
+        username,
+        first_name,
+        last_name,
+        contact_no
+      FROM responder
+      WHERE team_leader_id = ?
+    `;
+    const [rows] = await db.execute(sql, [team_leader_id]);
+    return rows;
   },
 
   async getAssignedIncidents(responder_id) {
